@@ -31,24 +31,24 @@ export function AddToCart({ product }: { product: Product }) {
 
   if (soldOut) {
     return (
-      <span className="w-fit rounded-full border border-line px-5 py-3 font-mono text-xs uppercase tracking-wide text-foreground-soft">
+      <span className="mt-2 w-fit rounded-full bg-background px-5 py-3 text-sm font-bold text-foreground-soft">
         Agotado
       </span>
     );
   }
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="flex items-center rounded-full border border-line">
+    <div className="mt-2 flex items-center gap-3">
+      <div className="flex items-center gap-1 rounded-full bg-background p-1">
         <button
           type="button"
           aria-label="Restar cantidad"
           onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-          className="px-3 py-2 font-mono text-sm"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-surface text-lg font-bold"
         >
           −
         </button>
-        <span className="min-w-6 text-center font-mono text-sm tabular-nums">
+        <span className="min-w-7 text-center text-sm font-bold tabular-nums">
           {quantity}
         </span>
         <button
@@ -57,7 +57,7 @@ export function AddToCart({ product }: { product: Product }) {
           onClick={() =>
             setQuantity((q) => (maxQuantity != null ? Math.min(maxQuantity, q + 1) : q + 1))
           }
-          className="px-3 py-2 font-mono text-sm"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-surface text-lg font-bold"
         >
           +
         </button>
@@ -65,7 +65,7 @@ export function AddToCart({ product }: { product: Product }) {
       <button
         type="button"
         onClick={handleAdd}
-        className="rounded-full bg-lime px-6 py-3 font-mono text-sm font-bold uppercase tracking-wide text-lime-ink transition-opacity hover:opacity-90"
+        className="flex-1 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.02]"
       >
         {added ? "Agregado ✓" : "Agregar al carrito"}
       </button>
