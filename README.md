@@ -45,16 +45,17 @@ Cada fase se construye sobre la anterior — la tienda de hoy ya es la base de d
 ## ✨ Qué hace (roadmap)
 
 **Fase 0 — Fundamentos**
-- [x] Paleta y tipografía definitivas (lima + violeta, Unbounded + Hanken Grotesk + Space Mono)
+- [x] Paleta y tipografía definitivas (verde + amarillo, Baloo 2 + Plus Jakarta Sans — estética bold inspirada en apps como Rappi)
 - [x] Setup de Next.js + Tailwind + Supabase
+- [x] Modo claro y modo oscuro
 - [ ] Objeto 3D modelado en Blender para el hero
 
 **Fase 1 — Tienda personal / MVP (en progreso)**
-- [x] Catálogo de productos (listado + detalle) conectado a Supabase
+- [x] Catálogo de productos (listado + detalle) conectado a Supabase, con categorías y filtro
 - [x] Diseño responsive / mobile-first
-- [ ] Carrito de compras
-- [ ] Checkout real con Stripe
-- [ ] SEO básico
+- [x] Carrito de compras (persistido en localStorage, agregado rápido desde la grilla)
+- [x] Checkout real con Stripe (falta cargar las claves de API para que procese pagos de verdad)
+- [x] SEO básico (metadata, OG tags por producto, sitemap, robots.txt)
 
 **Fase 2 — Comunidad y descubrimiento**
 - [ ] Cuentas de usuario (favoritos, historial)
@@ -90,13 +91,14 @@ Abrir [http://localhost:3000](http://localhost:3000).
 |---|---|
 | Frontend | Next.js (App Router) + TypeScript + Tailwind CSS v4 |
 | Datos | Supabase (Postgres + Row Level Security) |
-| Diseño | Unbounded + Hanken Grotesk + Space Mono · paleta lima / violeta |
-| Próximo | GSAP + ScrollTrigger, Three.js (React Three Fiber), Lenis, Stripe |
+| Pagos | Stripe Checkout |
+| Diseño | Baloo 2 + Plus Jakarta Sans · paleta verde / amarillo · modo claro y oscuro |
+| Próximo | GSAP + ScrollTrigger, Three.js (React Three Fiber), Lenis |
 
 ```text
-src/app/              → rutas: home, /productos, /productos/[slug]
-src/components/       → componentes de UI (ProductCard)
-src/lib/              → cliente de Supabase y acceso a datos
+src/app/              → rutas: home, /productos, /productos/[slug], /carrito, /api/checkout
+src/components/       → componentes de UI (ProductCard, Header, ThemeToggle, AddToCart)
+src/lib/              → clientes de Supabase/Stripe y acceso a datos
 supabase/migrations/  → esquema de la base, versionado
 public/products/      → fotos de producto
 ROADMAP.md            → mapa completo del proyecto (fases, stack, diseño)
@@ -107,7 +109,7 @@ ROADMAP.md            → mapa completo del proyecto (fases, stack, diseño)
 - [Roadmap completo del proyecto](ROADMAP.md)
 - [Documentación de Next.js](https://nextjs.org/docs)
 - [Documentación de Supabase](https://supabase.com/docs)
-- [Referencia de dirección de diseño — landonorris.com](https://landonorris.com/)
+- [Documentación de Stripe Checkout](https://docs.stripe.com/checkout/quickstart)
 
 ## 📄 Licencia
 
