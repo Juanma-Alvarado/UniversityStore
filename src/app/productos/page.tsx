@@ -5,7 +5,8 @@ import { ProductGridSkeleton } from "@/components/product-grid-skeleton";
 import { getProducts } from "@/lib/products";
 
 export const metadata = {
-  title: "Productos · UniversityStore",
+  title: "Productos",
+  description: "Todo lo que vendemos, en un solo lugar.",
 };
 
 type Props = {
