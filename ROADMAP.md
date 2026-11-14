@@ -1,6 +1,6 @@
 # UniversityStore — Guía del proyecto
 
-> Versión navegable con diseño completo: https://claude.ai/code/artifact/05b7f3c5-0353-469f-a835-bb18af921ea7
+> Concepto visual de la dirección de diseño actual: https://claude.ai/code/artifact/6ba03b11-5106-4725-bb40-e36b5c569636
 
 El marketplace de los emprendimientos universitarios — pero empieza como tienda personal antes de convertirse en plataforma.
 
@@ -12,9 +12,9 @@ El marketplace de los emprendimientos universitarios — pero empieza como tiend
 |---|---|---|
 | Frontend | Next.js + Tailwind | Rutas, SEO y rendimiento de fábrica |
 | Animación | GSAP + ScrollTrigger | Se mantiene igual |
-| 3D / WebGL | Three.js (React Three Fiber) | Mismo motor, integrado como componentes React |
+| 3D / WebGL | Three.js (React Three Fiber) | Descartado por ahora — una foto de producto con GSAP cumple el mismo rol para el hero |
 | Scroll suave | Lenis | Se mantiene igual, integración oficial con GSAP |
-| Modelado 3D | Blender → glTF/GLB | Se mantiene igual |
+| Modelado 3D | Blender → glTF/GLB | Descartado por ahora, ver nota de arriba |
 | Transiciones de página | View Transitions API | Reemplaza a Barba.js (pensado para vanilla JS) |
 | Datos + cuentas | Supabase | Postgres + Auth + Storage, escala a multi-vendedor sin migrar |
 | Pagos | Stripe → Stripe Connect | Checkout simple ahora, split de pagos cuando haya más vendedores |
@@ -22,20 +22,22 @@ El marketplace de los emprendimientos universitarios — pero empieza como tiend
 
 ## Dirección de diseño
 
-Referencia: landonorris.com — fondo oscuro, un solo acento eléctrico, tipografía grande y segura, hover states como premio, foto/contenido real.
+Primera versión (descartada): fondo oscuro, acento lima + violeta eléctrico, tipografía Unbounded + Hanken Grotesk + Space Mono — inspirada en landonorris.com. No convenció: se sentía a sitio editorial de agencia, no a app comercial.
 
-Se adapta (no se copia) la paleta: acento lima + violeta eléctrico sobre tinta/papel, con tema claro ("fanzine en papel") y oscuro ("póster de recital").
+Dirección actual, inspirada en apps como Rappi: color dominante vibrante (no un acento tímido), esquinas muy redondeadas, cards foto-céntricas con badges flotantes, botones píldora, tono informal. Se adapta la paleta (no se copia): verde en vez de naranja, con amarillo como secundario.
 
-- **Lima** `#8FAE00` · **Violeta** `#5A3FD1` · **Tinta** `#15180F` · **Papel** `#F4F1E6`
-- Tipografía: **Unbounded** (titulares) + **Hanken Grotesk** (cuerpo) + **Space Mono** (labels/data)
-- Motion: objeto 3D interactivo en el hero (Blender → Three.js), scroll suave con Lenis, reveals con GSAP ScrollTrigger, hover microinteracciones en cards de producto, galerías con scroll horizontal
+- **Verde** `#17B35B` (dark: `#1FCB6E`) · **Amarillo** `#FFC527` (dark: `#FFCF47`) · **Tinta/Papel** invertidos entre modo claro (`#FFF8F3`/`#181511`) y oscuro (`#121212`/`#F5F3EF`)
+- Tipografía: **Baloo 2** (titulares, redonda y gorda) + **Plus Jakarta Sans** (cuerpo) — sin monoespaciada en ningún lado
+- Modo claro y oscuro con toggle manual (persistido en localStorage) y fallback a preferencia del sistema
+- Patrones de card: foto ocupando casi todo, precio y disponibilidad como badges flotantes, botón "+" circular de agregado rápido
+- Motion: hero animado con GSAP (foto de producto real con fondo removido, no modelo 3D) + scroll suave con Lenis en todo el sitio. Three.js/Blender quedan descartados por ahora — la foto cumple el mismo objetivo con mucho menos esfuerzo
 
 ## Fases
 
 ### Fase 0 — Fundamentos (ahora)
 - Cerrar paleta y tipografía definitivas
 - Setup Next.js + Tailwind + Supabase en este repo
-- Modelar 1 objeto 3D en Blender para el hero
+- Hero animado (GSAP + Lenis) con foto de producto en vez de modelo 3D
 - Wireframes de Home, producto, carrito y checkout
 
 ### Fase 1 — Tienda personal (MVP)
@@ -51,7 +53,5 @@ Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard
 Diseño: vitrina personalizable por vendedor dentro de los límites de marca, feed de descubrimiento.
 
 ## Próximos pasos inmediatos
-1. Elegir los primeros productos reales (el catálogo se diseña con productos de verdad, no relleno)
-2. Confirmar paleta y tipografía (o ajustarlas)
-3. Inicializar el proyecto Next.js en este repo
-4. Bocetar Home y página de producto antes de meterle animación
+1. Cargar las claves reales de Stripe en `.env.local` para que el checkout procese pagos de verdad (pausado por ahora)
+2. Arrancar Fase 2: cuentas de usuario, reviews, newsletter

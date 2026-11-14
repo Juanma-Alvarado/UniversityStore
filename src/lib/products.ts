@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { supabase } from "@/lib/supabase";
 
 export type Product = {
@@ -10,6 +11,7 @@ export type Product = {
   image_url: string | null;
   stock: number;
   made_to_order: boolean;
+  category: string;
   created_at: string;
 };
 
@@ -23,7 +25,7 @@ export async function getProducts(): Promise<Product[]> {
   return data ?? [];
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | null> {
+export const getProductBySlug = cache(async (slug: string): Promise<Product | null> => {
   const { data, error } = await supabase
     .from("products")
     .select("*")
@@ -32,7 +34,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
   if (error) throw error;
   return data;
-}
+});
 
 export function formatPrice(price: number, currency: string): string {
   return new Intl.NumberFormat("es-AR", {
