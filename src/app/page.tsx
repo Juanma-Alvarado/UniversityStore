@@ -20,7 +20,7 @@ export default function Home() {
           </p>
           <Link
             href="/productos"
-            className="mt-6 inline-block rounded-full bg-foreground px-6 py-3 text-sm font-bold text-white"
+            className="mt-6 inline-block rounded-full bg-foreground px-6 py-3 text-sm font-bold text-background"
           >
             Ver productos →
           </Link>

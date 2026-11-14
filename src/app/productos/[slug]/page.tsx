@@ -50,7 +50,7 @@ async function ProductDetail({ params }: Props) {
             priority
           />
         ) : null}
-        <span className="absolute left-3 top-3 rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-foreground">
+        <span className="absolute left-3 top-3 rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink">
           {availabilityBadge}
         </span>
       </div>

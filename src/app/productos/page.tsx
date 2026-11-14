@@ -59,7 +59,7 @@ function Chip({ href, active, label }: { href: string; active: boolean; label: s
       href={href}
       className={
         active
-          ? "rounded-full bg-foreground px-4 py-2 text-sm font-bold text-white"
+          ? "rounded-full bg-foreground px-4 py-2 text-sm font-bold text-background"
           : "rounded-full bg-surface px-4 py-2 text-sm font-bold text-foreground shadow-[0_2px_8px_rgba(24,21,17,0.08)]"
       }
     >
