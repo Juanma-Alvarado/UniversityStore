@@ -12,6 +12,32 @@
   --accent-yellow: #ffc527;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --bg: #121212;
+    --fg: #f5f3ef;
+    --fg-soft: #a8a39a;
+    --surface: #1c1c1c;
+    --line: rgba(255, 255, 255, 0.1);
+    --primary: #1fcb6e;
+    --primary-press: #17a85a;
+    --primary-tint: #163826;
+    --accent-yellow: #ffcf47;
+  }
+}
+
+:root.dark {
+  --bg: #121212;
+  --fg: #f5f3ef;
+  --fg-soft: #a8a39a;
+  --surface: #1c1c1c;
+  --line: rgba(255, 255, 255, 0.1);
+  --primary: #1fcb6e;
+  --primary-press: #17a85a;
+  --primary-tint: #163826;
+  --accent-yellow: #ffcf47;
+}
+
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--fg);
@@ -22,6 +48,7 @@
   --color-primary-press: var(--primary-press);
   --color-primary-tint: var(--primary-tint);
   --color-yellow: var(--accent-yellow);
+  --color-ink: #181511;
   --font-display: var(--font-baloo);
   --font-sans: var(--font-jakarta);
 }
