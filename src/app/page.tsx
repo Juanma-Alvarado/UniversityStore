@@ -7,10 +7,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <header className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-16 pt-24 sm:pt-32">
-        <span className="font-mono text-xs uppercase tracking-widest text-foreground-soft">
-          UniversityStore
-        </span>
+      <header className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-16 pt-16 sm:pt-24">
         <h1 className="font-display text-5xl font-black text-balance sm:text-7xl">
           Tu producto,<br />tu marca
         </h1>
