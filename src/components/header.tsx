@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useCart } from "@/lib/cart-context";
 
 export function Header() {
@@ -30,6 +31,7 @@ export function Header() {
               </span>
             )}
           </Link>
+          <ThemeToggle />
         </div>
       </nav>
     </header>

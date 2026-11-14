@@ -22,13 +22,17 @@ export const metadata: Metadata = {
     "La tienda de los emprendimientos universitarios. Hoy, tus propios productos.",
 };
 
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.classList.add(t);}catch(e){}})();`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
+      suppressHydrationWarning
       className={`${baloo.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <CartProvider>
           <Header />
           {children}
