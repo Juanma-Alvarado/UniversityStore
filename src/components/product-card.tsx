@@ -26,11 +26,11 @@ export function ProductCard({ product }: { product: Product }) {
           />
         ) : null}
         {availabilityBadge && (
-          <span className="absolute left-2.5 top-2.5 rounded-full bg-yellow px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-wide text-foreground">
+          <span className="absolute left-2.5 top-2.5 rounded-full bg-yellow px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-wide text-ink">
             {availabilityBadge}
           </span>
         )}
-        <span className="absolute bottom-2.5 left-2.5 rounded-full bg-foreground px-3 py-1.5 text-sm font-extrabold text-white">
+        <span className="absolute bottom-2.5 left-2.5 rounded-full bg-foreground px-3 py-1.5 text-sm font-extrabold text-background">
           {formatPrice(product.price, product.currency)}
         </span>
       </div>
