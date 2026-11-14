@@ -40,7 +40,7 @@ export function HeroVisual() {
   return (
     <div
       ref={ref}
-      className="relative mx-auto w-44 opacity-0 sm:w-60"
+      className="relative mx-auto w-52 opacity-0 sm:w-64 md:w-72"
       style={{ rotate: "-6deg" }}
     >
       <Image
