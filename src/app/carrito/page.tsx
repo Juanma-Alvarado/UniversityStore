@@ -33,11 +33,11 @@ export default function CarritoPage() {
 
   if (items.length === 0) {
     return (
-      <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-start gap-4 px-6 py-24">
-        <h1 className="font-display text-3xl font-black">Tu carrito está vacío</h1>
+      <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-start gap-4 px-6 py-16">
+        <h1 className="font-display text-3xl font-extrabold">Tu carrito está vacío</h1>
         <Link
           href="/productos"
-          className="rounded-full bg-lime px-6 py-3 font-mono text-sm font-bold uppercase tracking-wide text-lime-ink"
+          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white"
         >
           Ver productos
         </Link>
@@ -48,51 +48,51 @@ export default function CarritoPage() {
   const currency = items[0].currency;
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-24">
-      <h1 className="mb-10 font-display text-3xl font-black">Tu carrito</h1>
+    <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
+      <h1 className="mb-6 font-display text-3xl font-extrabold">Tu carrito</h1>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {items.map((item) => (
           <div
             key={item.productId}
-            className="flex items-center gap-4 rounded-2xl border border-line bg-surface p-4"
+            className="flex items-center gap-4 rounded-[20px] bg-surface p-3.5 shadow-[0_4px_16px_rgba(24,21,17,0.08)]"
           >
-            <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-background">
+            <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-2xl bg-primary-tint">
               {item.imageUrl && (
                 <Image
                   src={item.imageUrl}
                   alt={item.name}
                   fill
-                  sizes="80px"
+                  sizes="64px"
                   className="object-cover"
                 />
               )}
             </div>
 
-            <div className="flex flex-1 flex-col gap-1">
+            <div className="flex flex-1 flex-col gap-0.5">
               <span className="font-display text-sm font-bold">{item.name}</span>
-              <span className="font-mono text-sm text-lime">
+              <span className="text-sm font-extrabold text-primary">
                 {formatPrice(item.price, item.currency)}
               </span>
             </div>
 
-            <div className="flex items-center rounded-full border border-line">
+            <div className="flex items-center gap-1 rounded-full bg-background p-1">
               <button
                 type="button"
                 aria-label="Restar cantidad"
                 onClick={() => setQuantity(item.productId, item.quantity - 1)}
-                className="px-3 py-1.5 font-mono text-sm"
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-surface text-sm font-bold"
               >
                 −
               </button>
-              <span className="min-w-6 text-center font-mono text-sm tabular-nums">
+              <span className="min-w-5 text-center text-sm font-bold tabular-nums">
                 {item.quantity}
               </span>
               <button
                 type="button"
                 aria-label="Sumar cantidad"
                 onClick={() => setQuantity(item.productId, item.quantity + 1)}
-                className="px-3 py-1.5 font-mono text-sm"
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-surface text-sm font-bold"
               >
                 +
               </button>
@@ -101,7 +101,7 @@ export default function CarritoPage() {
             <button
               type="button"
               onClick={() => removeItem(item.productId)}
-              className="font-mono text-xs uppercase tracking-wide text-foreground-soft hover:text-violet"
+              className="text-xs font-bold text-foreground-soft hover:text-primary"
             >
               Quitar
             </button>
@@ -109,11 +109,9 @@ export default function CarritoPage() {
         ))}
       </div>
 
-      <div className="mt-10 flex items-center justify-between border-t border-line pt-6">
-        <span className="font-mono text-sm uppercase tracking-wide text-foreground-soft">
-          Subtotal
-        </span>
-        <span className="font-display text-2xl font-black">
+      <div className="mt-6 flex items-center justify-between rounded-[20px] bg-surface px-5 py-4 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
+        <span className="text-sm font-bold text-foreground-soft">Subtotal</span>
+        <span className="font-display text-xl font-extrabold">
           {formatPrice(subtotal, currency)}
         </span>
       </div>
@@ -122,13 +120,13 @@ export default function CarritoPage() {
         type="button"
         onClick={handleCheckout}
         disabled={loading}
-        className="mt-6 w-full rounded-full bg-lime px-6 py-4 font-mono text-sm font-bold uppercase tracking-wide text-lime-ink transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="mt-4 w-full rounded-full bg-primary px-6 py-4 text-sm font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-60"
       >
         {loading ? "Redirigiendo a pago..." : "Finalizar compra"}
       </button>
 
       {checkoutError && (
-        <p className="mt-3 text-sm text-violet">{checkoutError}</p>
+        <p className="mt-3 text-sm font-bold text-red-600">{checkoutError}</p>
       )}
     </main>
   );

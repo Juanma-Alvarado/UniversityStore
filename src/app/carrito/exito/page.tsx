@@ -9,7 +9,7 @@ type Props = {
 
 export default function ExitoPage({ searchParams }: Props) {
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-start gap-4 px-6 py-24">
+    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-start gap-4 px-6 py-16">
       <Suspense fallback={<p className="text-foreground-soft">Confirmando tu pago…</p>}>
         <Confirmation searchParams={searchParams} />
       </Suspense>
@@ -32,13 +32,13 @@ async function Confirmation({ searchParams }: Props) {
   if (!session || session.payment_status !== "paid") {
     return (
       <>
-        <h1 className="font-display text-3xl font-black">No encontramos tu pedido</h1>
+        <h1 className="font-display text-3xl font-extrabold">No encontramos tu pedido</h1>
         <p className="text-foreground-soft">
           Si ya pagaste y ves esto, escribinos para confirmar tu compra.
         </p>
         <Link
           href="/productos"
-          className="rounded-full bg-lime px-6 py-3 font-mono text-sm font-bold uppercase tracking-wide text-lime-ink"
+          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white"
         >
           Volver a productos
         </Link>
@@ -49,10 +49,10 @@ async function Confirmation({ searchParams }: Props) {
   return (
     <>
       <ClearCartOnSuccess />
-      <span className="font-mono text-xs uppercase tracking-widest text-lime">
+      <span className="rounded-full bg-primary-tint px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-primary">
         Pago confirmado
       </span>
-      <h1 className="font-display text-3xl font-black">¡Gracias por tu compra!</h1>
+      <h1 className="font-display text-3xl font-extrabold">¡Gracias por tu compra!</h1>
       <p className="text-foreground-soft">
         Pagaste{" "}
         {new Intl.NumberFormat("es-AR", {
@@ -64,7 +64,7 @@ async function Confirmation({ searchParams }: Props) {
       </p>
       <Link
         href="/productos"
-        className="rounded-full bg-lime px-6 py-3 font-mono text-sm font-bold uppercase tracking-wide text-lime-ink"
+        className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white"
       >
         Seguir mirando productos
       </Link>
