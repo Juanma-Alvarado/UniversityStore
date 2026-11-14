@@ -7,26 +7,34 @@ import { getProducts } from "@/lib/products";
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
-      <header className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-16 pt-16 sm:pt-24">
-        <h1 className="font-display text-5xl font-black text-balance sm:text-7xl">
-          Tu producto,<br />tu marca
-        </h1>
-        <p className="max-w-md text-lg text-foreground-soft">
-          Hoy, mis propios productos. Mañana, los de todos los
-          emprendimientos de la universidad.
-        </p>
-        <Link
-          href="/productos"
-          className="mt-2 w-fit rounded-full bg-lime px-6 py-3 font-mono text-sm font-bold uppercase tracking-wide text-lime-ink transition-opacity hover:opacity-90"
-        >
-          Ver productos
-        </Link>
-      </header>
+      <div className="mx-auto w-full max-w-5xl px-6 pt-6">
+        <section className="relative overflow-hidden rounded-[28px] bg-primary px-7 py-9 text-white sm:px-10 sm:py-12">
+          <h1 className="font-display text-4xl font-extrabold leading-tight text-balance sm:text-5xl">
+            Tu producto,
+            <br />
+            directo al campus
+          </h1>
+          <p className="mt-3 max-w-xs text-sm text-white/90 sm:text-base">
+            Hoy, mis propios productos. Mañana, los de todos los
+            emprendimientos de la universidad.
+          </p>
+          <Link
+            href="/productos"
+            className="mt-6 inline-block rounded-full bg-foreground px-6 py-3 text-sm font-bold text-white"
+          >
+            Ver productos →
+          </Link>
+          <div className="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-white/10" />
+        </section>
+      </div>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-24">
-        <h2 className="mb-6 font-display text-2xl font-bold">
-          Nuestros productos
-        </h2>
+      <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
+        <div className="mb-5 flex items-baseline justify-between">
+          <h2 className="font-display text-xl font-bold">Lo más pedido</h2>
+          <Link href="/productos" className="text-sm font-bold text-primary">
+            Ver todo
+          </Link>
+        </div>
         <Suspense fallback={<ProductGridSkeleton />}>
           <FeaturedProducts />
         </Suspense>
@@ -47,7 +55,7 @@ async function FeaturedProducts() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
