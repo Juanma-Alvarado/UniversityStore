@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AddToCart } from "@/components/add-to-cart";
 import { formatPrice, getProductBySlug } from "@/lib/products";
 
 type Props = {
@@ -51,6 +52,7 @@ export default async function ProductoPage({ params }: Props) {
           <span className="w-fit rounded-full border border-line px-3 py-1 font-mono text-xs uppercase tracking-wide text-foreground-soft">
             {availability}
           </span>
+          <AddToCart product={product} />
         </div>
       </div>
     </main>
