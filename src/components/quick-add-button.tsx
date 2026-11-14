@@ -1,5 +1,6 @@
 "use client";
 
+import type { MouseEvent } from "react";
 import { useCart } from "@/lib/cart-context";
 import type { Product } from "@/lib/products";
 
@@ -7,7 +8,7 @@ export function QuickAddButton({ product }: { product: Product }) {
   const { addItem } = useCart();
   const soldOut = !product.made_to_order && product.stock <= 0;
 
-  function handleClick(e: React.MouseEvent) {
+  function handleClick(e: MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
     if (soldOut) return;
