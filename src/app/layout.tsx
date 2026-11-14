@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_2, Plus_Jakarta_Sans } from "next/font/google";
 import { CartProvider } from "@/lib/cart-context";
 import { Header } from "@/components/header";
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -49,10 +50,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col font-sans">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-        <CartProvider>
-          <Header />
-          {children}
-        </CartProvider>
+        <SmoothScrollProvider>
+          <CartProvider>
+            <Header />
+            {children}
+          </CartProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );
