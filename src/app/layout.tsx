@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Unbounded, Hanken_Grotesk, Space_Mono } from "next/font/google";
+import { CartProvider } from "@/lib/cart-context";
+import { Header } from "@/components/header";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -32,7 +34,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${unbounded.variable} ${hankenGrotesk.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <CartProvider>
+          <Header />
+          {children}
+        </CartProvider>
+      </body>
     </html>
   );
 }
