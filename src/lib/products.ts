@@ -10,6 +10,7 @@ export type Product = {
   image_url: string | null;
   stock: number;
   made_to_order: boolean;
+  category: string;
   created_at: string;
 };
 
