@@ -12,9 +12,9 @@ El marketplace de los emprendimientos universitarios — pero empieza como tiend
 |---|---|---|
 | Frontend | Next.js + Tailwind | Rutas, SEO y rendimiento de fábrica |
 | Animación | GSAP + ScrollTrigger | Se mantiene igual |
-| 3D / WebGL | Three.js (React Three Fiber) | Mismo motor, integrado como componentes React |
+| 3D / WebGL | Three.js (React Three Fiber) | Descartado por ahora — una foto de producto con GSAP cumple el mismo rol para el hero |
 | Scroll suave | Lenis | Se mantiene igual, integración oficial con GSAP |
-| Modelado 3D | Blender → glTF/GLB | Se mantiene igual |
+| Modelado 3D | Blender → glTF/GLB | Descartado por ahora, ver nota de arriba |
 | Transiciones de página | View Transitions API | Reemplaza a Barba.js (pensado para vanilla JS) |
 | Datos + cuentas | Supabase | Postgres + Auth + Storage, escala a multi-vendedor sin migrar |
 | Pagos | Stripe → Stripe Connect | Checkout simple ahora, split de pagos cuando haya más vendedores |
@@ -30,14 +30,14 @@ Dirección actual, inspirada en apps como Rappi: color dominante vibrante (no un
 - Tipografía: **Baloo 2** (titulares, redonda y gorda) + **Plus Jakarta Sans** (cuerpo) — sin monoespaciada en ningún lado
 - Modo claro y oscuro con toggle manual (persistido en localStorage) y fallback a preferencia del sistema
 - Patrones de card: foto ocupando casi todo, precio y disponibilidad como badges flotantes, botón "+" circular de agregado rápido
-- Motion pendiente: objeto 3D interactivo en el hero (Blender → Three.js), scroll suave con Lenis, reveals con GSAP ScrollTrigger
+- Motion: hero animado con GSAP (foto de producto real con fondo removido, no modelo 3D) + scroll suave con Lenis en todo el sitio. Three.js/Blender quedan descartados por ahora — la foto cumple el mismo objetivo con mucho menos esfuerzo
 
 ## Fases
 
 ### Fase 0 — Fundamentos (ahora)
 - Cerrar paleta y tipografía definitivas
 - Setup Next.js + Tailwind + Supabase en este repo
-- Modelar 1 objeto 3D en Blender para el hero
+- Hero animado (GSAP + Lenis) con foto de producto en vez de modelo 3D
 - Wireframes de Home, producto, carrito y checkout
 
 ### Fase 1 — Tienda personal (MVP)
@@ -53,6 +53,5 @@ Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard
 Diseño: vitrina personalizable por vendedor dentro de los límites de marca, feed de descubrimiento.
 
 ## Próximos pasos inmediatos
-1. Cargar las claves reales de Stripe en `.env.local` para que el checkout procese pagos de verdad
-2. Modelar el objeto 3D del hero en Blender y conectarlo con Three.js / GSAP ScrollTrigger / Lenis
-3. Arrancar Fase 2: cuentas de usuario, reviews, newsletter
+1. Cargar las claves reales de Stripe en `.env.local` para que el checkout procese pagos de verdad (pausado por ahora)
+2. Arrancar Fase 2: cuentas de usuario, reviews, newsletter

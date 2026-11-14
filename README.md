@@ -48,7 +48,7 @@ Cada fase se construye sobre la anterior — la tienda de hoy ya es la base de d
 - [x] Paleta y tipografía definitivas (verde + amarillo, Baloo 2 + Plus Jakarta Sans — estética bold inspirada en apps como Rappi)
 - [x] Setup de Next.js + Tailwind + Supabase
 - [x] Modo claro y modo oscuro
-- [ ] Objeto 3D modelado en Blender para el hero
+- [x] Hero animado con GSAP + Lenis (foto de producto con fondo removido, no modelo 3D)
 
 **Fase 1 — Tienda personal / MVP (en progreso)**
 - [x] Catálogo de productos (listado + detalle) conectado a Supabase, con categorías y filtro
@@ -93,7 +93,7 @@ Abrir [http://localhost:3000](http://localhost:3000).
 | Datos | Supabase (Postgres + Row Level Security) |
 | Pagos | Stripe Checkout |
 | Diseño | Baloo 2 + Plus Jakarta Sans · paleta verde / amarillo · modo claro y oscuro |
-| Próximo | GSAP + ScrollTrigger, Three.js (React Three Fiber), Lenis |
+| Motion | GSAP + Lenis (scroll suave, hero animado) |
 
 ```text
 src/app/              → rutas: home, /productos, /productos/[slug], /carrito, /api/checkout
