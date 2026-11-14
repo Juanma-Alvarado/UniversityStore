@@ -9,6 +9,7 @@ export type Product = {
   currency: string;
   image_url: string | null;
   stock: number;
+  made_to_order: boolean;
   created_at: string;
 };
 
