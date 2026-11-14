@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
@@ -7,6 +8,28 @@ import { formatPrice } from "@/lib/products";
 
 export default function CarritoPage() {
   const { items, subtotal, setQuantity, removeItem } = useCart();
+  const [loading, setLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    setLoading(true);
+    setCheckoutError(null);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({ productId: i.productId, quantity: i.quantity })),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error ?? "No se pudo iniciar el pago");
+      window.location.href = data.url;
+    } catch (err) {
+      setCheckoutError(err instanceof Error ? err.message : "No se pudo iniciar el pago");
+      setLoading(false);
+    }
+  }
 
   if (items.length === 0) {
     return (
@@ -95,9 +118,18 @@ export default function CarritoPage() {
         </span>
       </div>
 
-      <p className="mt-4 text-sm text-foreground-soft">
-        El pago todavía no está conectado — el checkout llega en el próximo paso.
-      </p>
+      <button
+        type="button"
+        onClick={handleCheckout}
+        disabled={loading}
+        className="mt-6 w-full rounded-full bg-lime px-6 py-4 font-mono text-sm font-bold uppercase tracking-wide text-lime-ink transition-opacity hover:opacity-90 disabled:opacity-60"
+      >
+        {loading ? "Redirigiendo a pago..." : "Finalizar compra"}
+      </button>
+
+      {checkoutError && (
+        <p className="mt-3 text-sm text-violet">{checkoutError}</p>
+      )}
     </main>
   );
 }
