@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import { Unbounded, Hanken_Grotesk, Space_Mono } from "next/font/google";
+import { Baloo_2, Plus_Jakarta_Sans } from "next/font/google";
 import { CartProvider } from "@/lib/cart-context";
 import { Header } from "@/components/header";
 import "./globals.css";
 
-const unbounded = Unbounded({
-  variable: "--font-unbounded",
-  weight: ["500", "700", "900"],
+const baloo = Baloo_2({
+  variable: "--font-baloo",
+  weight: ["600", "700", "800"],
   subsets: ["latin"],
 });
 
-const hankenGrotesk = Hanken_Grotesk({
-  variable: "--font-hanken-grotesk",
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
-
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  weight: ["400", "700"],
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
 });
 
@@ -32,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${unbounded.variable} ${hankenGrotesk.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${baloo.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <CartProvider>
