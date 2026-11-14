@@ -1,10 +1,10 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ProductCard } from "@/components/product-card";
+import { ProductGridSkeleton } from "@/components/product-grid-skeleton";
 import { getProducts } from "@/lib/products";
 
-export default async function Home() {
-  const products = await getProducts();
-
+export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
       <header className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-6 pb-16 pt-16 sm:pt-24">
@@ -27,18 +27,30 @@ export default async function Home() {
         <h2 className="mb-6 font-display text-2xl font-bold">
           Nuestros productos
         </h2>
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-foreground-soft">
-            Pronto vas a encontrar acá los primeros productos.
-          </p>
-        )}
+        <Suspense fallback={<ProductGridSkeleton />}>
+          <FeaturedProducts />
+        </Suspense>
       </main>
+    </div>
+  );
+}
+
+async function FeaturedProducts() {
+  const products = await getProducts();
+
+  if (products.length === 0) {
+    return (
+      <p className="text-foreground-soft">
+        Pronto vas a encontrar acá los primeros productos.
+      </p>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
   );
 }
