@@ -39,9 +39,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    // localStorage no existe en el server: hidratar acá evita que el HTML
+    // del servidor (carrito vacío) no coincida con el primer render del cliente.
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setItems(JSON.parse(stored));
       } catch {
         // ignora un carrito corrupto en localStorage
