@@ -110,6 +110,7 @@ ROADMAP.md            → mapa completo del proyecto (fases, stack, diseño)
 - [Documentación de Next.js](https://nextjs.org/docs)
 - [Documentación de Supabase](https://supabase.com/docs)
 - [Documentación de Stripe Checkout](https://docs.stripe.com/checkout/quickstart)
+- [Referencia de dirección de diseño — Rappi Colombia](https://www.rappi.com.co/)
 
 ## 📄 Licencia
 
