@@ -44,8 +44,14 @@ Dirección actual, inspirada en apps como Rappi: color dominante vibrante (no un
 Funcionalidades: catálogo (listado + detalle), carrito, checkout real con Stripe, mobile-first, SEO básico.
 Diseño: hero 3D interactivo, grid de productos con hover, checkout simple sin sacrificar conversión.
 
-### Fase 2 — Comunidad y descubrimiento
+### Fase 2 — Comunidad y descubrimiento (en curso)
 Funcionalidades: cuentas de usuario (favoritos/historial), reviews, categorías/tags, newsletter.
+
+Hecho:
+- Cuentas con Supabase Auth (email + contraseña, confirmación por mail), tabla `profiles` con nombre visible, página `/cuenta`, sesión refrescada por `src/proxy.ts`
+- Categorías con filtro en el catálogo (heredado de Fase 1)
+
+Falta: favoritos, historial de pedidos, reviews, newsletter.
 Diseño: contenido "detrás del emprendimiento", transiciones fluidas entre categorías.
 
 ### Fase 3 — Marketplace multi-vendedor (visión final)
@@ -54,4 +60,5 @@ Diseño: vitrina personalizable por vendedor dentro de los límites de marca, fe
 
 ## Próximos pasos inmediatos
 1. Cargar las claves reales de Stripe en `.env.local` para que el checkout procese pagos de verdad (pausado por ahora)
-2. Arrancar Fase 2: cuentas de usuario, reviews, newsletter
+2. En Supabase → Authentication → URL Configuration: agregar `http://localhost:3000/auth/callback` (y el dominio real cuando se deploye) a las Redirect URLs
+3. Seguir Fase 2: favoritos → reviews → historial de pedidos → newsletter
