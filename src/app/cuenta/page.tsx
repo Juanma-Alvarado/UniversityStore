@@ -1,0 +1,53 @@
+import { Suspense } from "react";
+import { requireProfile } from "@/lib/auth";
+import { ProfileForm } from "@/components/profile-form";
+import { SignOutButton } from "@/components/sign-out-button";
+
+export const metadata = {
+  title: "Mi cuenta",
+  robots: { index: false },
+};
+
+export default function CuentaPage() {
+  return (
+    <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-10">
+      <h1 className="mb-6 font-display text-3xl font-extrabold">Mi cuenta</h1>
+      <Suspense fallback={<div className="h-56 animate-pulse rounded-[28px] bg-surface" />}>
+        <AccountDetails />
+      </Suspense>
+    </main>
+  );
+}
+
+async function AccountDetails() {
+  const profile = await requireProfile("/cuenta");
+  const memberSince = new Intl.DateTimeFormat("es-AR", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date(profile.createdAt));
+  const initial = (profile.displayName || profile.email).charAt(0).toUpperCase();
+
+  return (
+    <div className="flex flex-col gap-4">
+      <section className="flex items-center gap-4 rounded-[28px] bg-primary p-6 text-white">
+        <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-yellow font-display text-3xl font-extrabold text-ink">
+          {initial}
+        </span>
+        <div className="min-w-0">
+          <p className="truncate font-display text-2xl font-extrabold">
+            {profile.displayName || "Sin nombre"}
+          </p>
+          <p className="truncate text-sm text-white/90">{profile.email}</p>
+          <p className="text-xs text-white/75">Miembro desde {memberSince}</p>
+        </div>
+      </section>
+
+      <section className="rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
+        <h2 className="mb-4 font-display text-lg font-bold">Tus datos</h2>
+        <ProfileForm displayName={profile.displayName} />
+      </section>
+
+      <SignOutButton />
+    </div>
+  );
+}
