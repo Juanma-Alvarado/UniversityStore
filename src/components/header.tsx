@@ -17,7 +17,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Link
             href="/productos"
-            className="rounded-full px-4 py-2 text-sm font-bold text-foreground-soft hover:text-foreground"
+            className="hidden rounded-full px-4 py-2 text-sm font-bold text-foreground-soft hover:text-foreground sm:inline-block"
           >
             Productos
           </Link>
