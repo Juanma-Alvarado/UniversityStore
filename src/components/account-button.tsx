@@ -3,20 +3,19 @@
 import Link from "next/link";
 import { displayNameOf, useAuth } from "@/lib/auth-context";
 
+const BOX = "flex h-11 w-11 items-center justify-center rounded-2xl border border-line";
+
 export function AccountButton() {
   const { user, ready } = useAuth();
 
   if (!ready) {
-    return <span className="h-11 w-11 animate-pulse rounded-2xl bg-surface" aria-hidden />;
+    return <span className={`${BOX} bg-surface`} aria-hidden />;
   }
 
   if (!user) {
     return (
-      <Link
-        href="/ingresar"
-        className="rounded-full bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-press"
-      >
-        Ingresar
+      <Link href="/ingresar" aria-label="Ingresar" className={`${BOX} bg-surface text-lg`}>
+        👤
       </Link>
     );
   }
@@ -27,7 +26,7 @@ export function AccountButton() {
     <Link
       href="/cuenta"
       aria-label="Mi cuenta"
-      className="flex h-11 w-11 items-center justify-center rounded-2xl bg-yellow font-display text-lg font-extrabold text-ink"
+      className={`${BOX} bg-yellow font-display text-lg font-extrabold text-ink`}
     >
       {initial}
     </Link>
