@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { AccountButton } from "@/components/account-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useCart } from "@/lib/cart-context";
 
@@ -31,6 +32,7 @@ export function Header() {
               </span>
             )}
           </Link>
+          <AccountButton />
           <ThemeToggle />
         </div>
       </nav>
