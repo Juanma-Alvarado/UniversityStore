@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCart } from "@/components/add-to-cart";
+import { FavoriteButton } from "@/components/favorite-button";
 import { formatPrice, getProductBySlug } from "@/lib/products";
 
 type Props = {
@@ -71,6 +72,12 @@ async function ProductDetail({ params }: Props) {
         <span className="absolute left-3 top-3 rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink">
           {availabilityBadge}
         </span>
+        <FavoriteButton
+          productId={product.id}
+          productName={product.name}
+          size="lg"
+          className="absolute right-3 top-3"
+        />
       </div>
       <div className="flex flex-col gap-3">
         <span className="text-xs font-bold uppercase tracking-wide text-foreground-soft">
