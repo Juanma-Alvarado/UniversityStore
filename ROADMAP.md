@@ -50,8 +50,9 @@ Funcionalidades: cuentas de usuario (favoritos/historial), reviews, categorías/
 Hecho:
 - Cuentas con Supabase Auth (email + contraseña, confirmación por mail), tabla `profiles` con nombre visible, página `/cuenta`, sesión refrescada por `src/proxy.ts`
 - Categorías con filtro en el catálogo (heredado de Fase 1)
+- Favoritos: tabla `favorites` con RLS por usuario, corazón en cada card y en el detalle (optimista), página `/favoritos` enlazada desde `/cuenta`
 
-Falta: favoritos, historial de pedidos, reviews, newsletter.
+Falta: reviews, historial de pedidos, newsletter.
 Diseño: contenido "detrás del emprendimiento", transiciones fluidas entre categorías.
 
 ### Fase 3 — Marketplace multi-vendedor (visión final)
@@ -61,4 +62,5 @@ Diseño: vitrina personalizable por vendedor dentro de los límites de marca, fe
 ## Próximos pasos inmediatos
 1. Cargar las claves reales de Stripe en `.env.local` para que el checkout procese pagos de verdad (pausado por ahora)
 2. En Supabase → Authentication → URL Configuration: agregar `http://localhost:3000/auth/callback` (y el dominio real cuando se deploye) a las Redirect URLs
-3. Seguir Fase 2: favoritos → reviews → historial de pedidos → newsletter
+3. Aplicar en Supabase la migración `supabase/migrations/20261119120000_create_favorites.sql` (SQL Editor)
+4. Seguir Fase 2: reviews → historial de pedidos → newsletter
