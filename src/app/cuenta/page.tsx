@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { requireProfile } from "@/lib/auth";
 import { ProfileForm } from "@/components/profile-form";
 import { SignOutButton } from "@/components/sign-out-button";
@@ -41,6 +42,19 @@ async function AccountDetails() {
           <p className="text-xs text-white/75">Miembro desde {memberSince}</p>
         </div>
       </section>
+
+      <Link
+        href="/favoritos"
+        className="flex items-center justify-between rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)] transition-transform hover:-translate-y-0.5"
+      >
+        <span className="flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-tint text-xl text-primary">
+            ♥
+          </span>
+          <span className="font-display text-lg font-bold">Tus favoritos</span>
+        </span>
+        <span className="text-xl font-bold text-foreground-soft">→</span>
+      </Link>
 
       <section className="rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
         <h2 className="mb-4 font-display text-lg font-bold">Tus datos</h2>

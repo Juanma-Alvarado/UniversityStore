@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_2, Plus_Jakarta_Sans } from "next/font/google";
 import { AuthProvider } from "@/lib/auth-context";
 import { CartProvider } from "@/lib/cart-context";
+import { FavoritesProvider } from "@/lib/favorites-context";
 import { Header } from "@/components/header";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -53,10 +54,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <SmoothScrollProvider>
           <AuthProvider>
-            <CartProvider>
-              <Header />
-              {children}
-            </CartProvider>
+            <FavoritesProvider>
+              <CartProvider>
+                <Header />
+                {children}
+              </CartProvider>
+            </FavoritesProvider>
           </AuthProvider>
         </SmoothScrollProvider>
       </body>

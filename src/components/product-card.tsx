@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FavoriteButton } from "@/components/favorite-button";
 import { QuickAddButton } from "@/components/quick-add-button";
 import { formatPrice, type Product } from "@/lib/products";
 
@@ -30,6 +31,11 @@ export function ProductCard({ product }: { product: Product }) {
             {availabilityBadge}
           </span>
         )}
+        <FavoriteButton
+          productId={product.id}
+          productName={product.name}
+          className="absolute right-2.5 top-2.5"
+        />
         <span className="absolute bottom-2.5 left-2.5 rounded-full bg-foreground px-3 py-1.5 text-sm font-extrabold text-background">
           {formatPrice(product.price, product.currency)}
         </span>
