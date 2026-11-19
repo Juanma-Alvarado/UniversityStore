@@ -9,6 +9,10 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)
 
+<br>
+
+<img src="docs/portada.png" alt="Home de UniversityStore en modo oscuro: hero verde con remeras apiladas y grilla de productos" width="100%">
+
 </div>
 
 <br>
@@ -50,18 +54,19 @@ Cada fase se construye sobre la anterior — la tienda de hoy ya es la base de d
 - [x] Modo claro y modo oscuro
 - [x] Hero animado con GSAP + Lenis (foto de producto con fondo removido, no modelo 3D)
 
-**Fase 1 — Tienda personal / MVP (en progreso)**
+**Fase 1 — Tienda personal / MVP**
 - [x] Catálogo de productos (listado + detalle) conectado a Supabase, con categorías y filtro
 - [x] Diseño responsive / mobile-first
 - [x] Carrito de compras (persistido en localStorage, agregado rápido desde la grilla)
 - [x] Checkout real con Stripe (falta cargar las claves de API para que procese pagos de verdad)
 - [x] SEO básico (metadata, OG tags por producto, sitemap, robots.txt)
 
-**Fase 2 — Comunidad y descubrimiento**
-- [ ] Cuentas de usuario (favoritos, historial)
-- [ ] Reviews y calificaciones de producto
-- [ ] Categorías y tags
-- [ ] Newsletter de nuevos lanzamientos
+**Fase 2 — Comunidad y descubrimiento (en progreso)**
+- [x] Cuentas de usuario (registro con confirmación por mail, página de cuenta)
+- [x] Favoritos (corazón en cada producto, página `/favoritos`)
+- [x] Reseñas y calificaciones de producto (1–5 estrellas + comentario)
+- [x] Categorías con filtro en el catálogo
+- [ ] Historial de pedidos
 
 **Fase 3 — Marketplace multi-vendedor (visión final)**
 - [ ] Onboarding de vendedores (verificación estudiantil)
@@ -90,17 +95,18 @@ Abrir [http://localhost:3000](http://localhost:3000).
 | Capa | Tecnologías |
 |---|---|
 | Frontend | Next.js (App Router) + TypeScript + Tailwind CSS v4 |
-| Datos | Supabase (Postgres + Row Level Security) |
+| Datos y cuentas | Supabase (Postgres + Auth + Row Level Security) |
 | Pagos | Stripe Checkout |
 | Diseño | Baloo 2 + Plus Jakarta Sans · paleta verde / amarillo · modo claro y oscuro |
 | Motion | GSAP + Lenis (scroll suave, hero animado) |
 
 ```text
-src/app/              → rutas: home, /productos, /productos/[slug], /carrito, /api/checkout
-src/components/       → componentes de UI (ProductCard, Header, ThemeToggle, AddToCart)
-src/lib/              → clientes de Supabase/Stripe y acceso a datos
+src/app/              → rutas: home, /productos, /productos/[slug], /carrito, /ingresar, /cuenta, /favoritos, /api/checkout
+src/components/       → componentes de UI (ProductCard, Header, FavoriteButton, ProductReviews…)
+src/lib/              → clientes de Supabase/Stripe, sesión, carrito, favoritos y acceso a datos
 supabase/migrations/  → esquema de la base, versionado
 public/products/      → fotos de producto
+docs/                 → imágenes del README
 ROADMAP.md            → mapa completo del proyecto (fases, stack, diseño)
 ```
 
