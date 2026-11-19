@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCart } from "@/components/add-to-cart";
 import { FavoriteButton } from "@/components/favorite-button";
+import { ProductReviews, ProductReviewsSkeleton } from "@/components/product-reviews";
 import { formatPrice, getProductBySlug } from "@/lib/products";
 
 type Props = {
@@ -57,42 +58,47 @@ async function ProductDetail({ params }: Props) {
       : "Agotado";
 
   return (
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-      <div className="relative aspect-square w-full overflow-hidden rounded-[24px] bg-primary-tint">
-        {product.image_url ? (
-          <Image
-            src={product.image_url}
-            alt={product.name}
-            fill
-            sizes="(min-width: 640px) 50vw, 100vw"
-            className="object-cover"
-            priority
+    <>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div className="relative aspect-square w-full overflow-hidden rounded-[24px] bg-primary-tint">
+          {product.image_url ? (
+            <Image
+              src={product.image_url}
+              alt={product.name}
+              fill
+              sizes="(min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+              priority
+            />
+          ) : null}
+          <span className="absolute left-3 top-3 rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink">
+            {availabilityBadge}
+          </span>
+          <FavoriteButton
+            productId={product.id}
+            productName={product.name}
+            size="lg"
+            className="absolute right-3 top-3"
           />
-        ) : null}
-        <span className="absolute left-3 top-3 rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink">
-          {availabilityBadge}
-        </span>
-        <FavoriteButton
-          productId={product.id}
-          productName={product.name}
-          size="lg"
-          className="absolute right-3 top-3"
-        />
+        </div>
+        <div className="flex flex-col gap-3">
+          <span className="text-xs font-bold uppercase tracking-wide text-foreground-soft">
+            {product.category}
+          </span>
+          <h1 className="font-display text-3xl font-extrabold text-balance">
+            {product.name}
+          </h1>
+          <span className="font-display text-2xl font-extrabold text-primary">
+            {formatPrice(product.price, product.currency)}
+          </span>
+          <p className="text-foreground-soft">{product.description}</p>
+          <AddToCart product={product} />
+        </div>
       </div>
-      <div className="flex flex-col gap-3">
-        <span className="text-xs font-bold uppercase tracking-wide text-foreground-soft">
-          {product.category}
-        </span>
-        <h1 className="font-display text-3xl font-extrabold text-balance">
-          {product.name}
-        </h1>
-        <span className="font-display text-2xl font-extrabold text-primary">
-          {formatPrice(product.price, product.currency)}
-        </span>
-        <p className="text-foreground-soft">{product.description}</p>
-        <AddToCart product={product} />
-      </div>
-    </div>
+      <Suspense fallback={<ProductReviewsSkeleton />}>
+        <ProductReviews productId={product.id} productSlug={product.slug} />
+      </Suspense>
+    </>
   );
 }
 
