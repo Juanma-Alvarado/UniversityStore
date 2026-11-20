@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { supabase } from "@/lib/supabase";
+import { getCurrentUser } from "@/lib/auth";
 
 type CheckoutRequest = {
   items: { productId: string; quantity: number }[];
@@ -34,6 +35,8 @@ export async function POST(request: NextRequest) {
         unit_amount: Math.round(product.price * 100),
         product_data: {
           name: product.name,
+          // El webhook lo lee para saber qué producto se vendió.
+          metadata: { product_id: product.id },
           images: product.image_url
             ? [new URL(product.image_url, request.url).toString()]
             : undefined,
@@ -43,11 +46,15 @@ export async function POST(request: NextRequest) {
   });
 
   const origin = new URL(request.url).origin;
+  // Comprar sin cuenta sigue permitido; si hay sesión, el pedido queda en su historial.
+  const user = await getCurrentUser();
 
   try {
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       line_items,
+      client_reference_id: user?.id,
+      customer_email: user?.email,
       success_url: `${origin}/carrito/exito?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/carrito`,
     });
