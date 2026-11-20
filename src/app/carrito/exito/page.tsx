@@ -62,12 +62,22 @@ async function Confirmation({ searchParams }: Props) {
         }).format((session.amount_total ?? 0) / 100)}
         . Te vamos a contactar para coordinar la entrega.
       </p>
-      <Link
-        href="/productos"
-        className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white"
-      >
-        Seguir mirando productos
-      </Link>
+      <div className="flex flex-wrap gap-3">
+        <Link
+          href="/productos"
+          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white"
+        >
+          Seguir mirando productos
+        </Link>
+        {session.client_reference_id && (
+          <Link
+            href="/pedidos"
+            className="rounded-full bg-surface px-6 py-3 text-sm font-bold shadow-[0_4px_16px_rgba(24,21,17,0.08)]"
+          >
+            Ver mis pedidos
+          </Link>
+        )}
+      </div>
     </>
   );
 }

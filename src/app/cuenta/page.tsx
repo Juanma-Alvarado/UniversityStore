@@ -44,6 +44,19 @@ async function AccountDetails() {
       </section>
 
       <Link
+        href="/pedidos"
+        className="flex items-center justify-between rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)] transition-transform hover:-translate-y-0.5"
+      >
+        <span className="flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-tint text-xl text-primary">
+            ▤
+          </span>
+          <span className="font-display text-lg font-bold">Tus pedidos</span>
+        </span>
+        <span className="text-xl font-bold text-foreground-soft">→</span>
+      </Link>
+
+      <Link
         href="/favoritos"
         className="flex items-center justify-between rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)] transition-transform hover:-translate-y-0.5"
       >
