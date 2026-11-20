@@ -32,6 +32,12 @@ function apiBase(): string {
     : "https://production.wompi.co/v1";
 }
 
+// Falla antes de crear el pedido si faltan llaves, para no dejar pedidos huérfanos.
+export function assertWompiConfigured() {
+  requireEnv("WOMPI_PUBLIC_KEY");
+  requireEnv("WOMPI_INTEGRITY_SECRET");
+}
+
 const sha256 = (value: string) => createHash("sha256").update(value).digest("hex");
 
 export function checkoutUrl(params: {

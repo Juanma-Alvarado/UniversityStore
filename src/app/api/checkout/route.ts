@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
-import { checkoutUrl } from "@/lib/wompi";
+import { assertWompiConfigured, checkoutUrl } from "@/lib/wompi";
 
 type CheckoutRequest = {
   items: { productId: string; quantity: number }[];
@@ -18,6 +18,8 @@ export async function POST(request: NextRequest) {
   const user = await getCurrentUser();
 
   try {
+    assertWompiConfigured();
+
     // El pedido nace "pending" con precios leídos de la base; su id es la
     // referencia que Wompi nos devuelve al confirmar el pago.
     const { data, error } = await getSupabaseAdmin()
