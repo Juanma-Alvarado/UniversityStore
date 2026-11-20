@@ -41,7 +41,7 @@ El problema es que la visión real no termina en "mi tienda". Es que cualquier e
 ## 💡 La solución
 
 ```text
-Catálogo (Supabase) → Tienda personal (Next.js) → Checkout (Stripe) → Marketplace multi-vendedor
+Catálogo (Supabase) → Tienda personal (Next.js) → Checkout (Wompi · PSE) → Marketplace multi-vendedor
 ```
 
 Cada fase se construye sobre la anterior — la tienda de hoy ya es la base de datos y el código del marketplace de mañana, no un prototipo descartable.
@@ -58,20 +58,20 @@ Cada fase se construye sobre la anterior — la tienda de hoy ya es la base de d
 - [x] Catálogo de productos (listado + detalle) conectado a Supabase, con categorías y filtro
 - [x] Diseño responsive / mobile-first
 - [x] Carrito de compras (persistido en localStorage, agregado rápido desde la grilla)
-- [x] Checkout real con Stripe (falta cargar las claves de API para que procese pagos de verdad)
+- [x] Checkout real con Wompi en pesos colombianos (PSE, tarjetas y Nequi)
 - [x] SEO básico (metadata, OG tags por producto, sitemap, robots.txt)
 
-**Fase 2 — Comunidad y descubrimiento (en progreso)**
+**Fase 2 — Comunidad y descubrimiento**
 - [x] Cuentas de usuario (registro con confirmación por mail, página de cuenta)
 - [x] Favoritos (corazón en cada producto, página `/favoritos`)
 - [x] Reseñas y calificaciones de producto (1–5 estrellas + comentario)
 - [x] Categorías con filtro en el catálogo
-- [ ] Historial de pedidos
+- [x] Historial de pedidos (página `/pedidos`)
 
 **Fase 3 — Marketplace multi-vendedor (visión final)**
 - [ ] Onboarding de vendedores (verificación estudiantil)
 - [ ] Dashboard de vendedor (productos, ventas, inventario)
-- [ ] Pagos divididos con Stripe Connect
+- [ ] Pagos divididos entre vendedores
 - [ ] Buscador y filtros por categoría/facultad/precio
 - [ ] Mensajería comprador-vendedor y moderación
 
@@ -96,14 +96,14 @@ Abrir [http://localhost:3000](http://localhost:3000).
 |---|---|
 | Frontend | Next.js (App Router) + TypeScript + Tailwind CSS v4 |
 | Datos y cuentas | Supabase (Postgres + Auth + Row Level Security) |
-| Pagos | Stripe Checkout |
+| Pagos | Wompi Web Checkout (COP) |
 | Diseño | Baloo 2 + Plus Jakarta Sans · paleta verde / amarillo · modo claro y oscuro |
 | Motion | GSAP + Lenis (scroll suave, hero animado) |
 
 ```text
-src/app/              → rutas: home, /productos, /productos/[slug], /carrito, /ingresar, /cuenta, /favoritos, /api/checkout
+src/app/              → rutas: home, /productos, /productos/[slug], /carrito, /ingresar, /cuenta, /favoritos, /pedidos, /api/checkout, /api/wompi/events
 src/components/       → componentes de UI (ProductCard, Header, FavoriteButton, ProductReviews…)
-src/lib/              → clientes de Supabase/Stripe, sesión, carrito, favoritos y acceso a datos
+src/lib/              → clientes de Supabase/Wompi, sesión, carrito, favoritos y acceso a datos
 supabase/migrations/  → esquema de la base, versionado
 public/products/      → fotos de producto
 docs/                 → imágenes del README
@@ -115,7 +115,7 @@ ROADMAP.md            → mapa completo del proyecto (fases, stack, diseño)
 - [Roadmap completo del proyecto](ROADMAP.md)
 - [Documentación de Next.js](https://nextjs.org/docs)
 - [Documentación de Supabase](https://supabase.com/docs)
-- [Documentación de Stripe Checkout](https://docs.stripe.com/checkout/quickstart)
+- [Documentación de Wompi Web Checkout](https://docs.wompi.co/docs/colombia/widget-checkout-web/)
 - [Referencia de dirección de diseño — Rappi Colombia](https://www.rappi.com.co/)
 
 ## 📄 Licencia

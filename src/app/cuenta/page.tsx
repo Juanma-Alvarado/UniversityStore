@@ -22,7 +22,7 @@ export default function CuentaPage() {
 
 async function AccountDetails() {
   const profile = await requireProfile("/cuenta");
-  const memberSince = new Intl.DateTimeFormat("es-AR", {
+  const memberSince = new Intl.DateTimeFormat("es-CO", {
     month: "long",
     year: "numeric",
   }).format(new Date(profile.createdAt));

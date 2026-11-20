@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStripe } from "@/lib/stripe";
-import { supabase } from "@/lib/supabase";
 import { getCurrentUser } from "@/lib/auth";
+import { getSupabaseAdmin } from "@/lib/supabase/admin";
+import { checkoutUrl } from "@/lib/wompi";
 
 type CheckoutRequest = {
   items: { productId: string; quantity: number }[];
@@ -14,52 +14,30 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "El carrito está vacío" }, { status: 400 });
   }
 
-  const ids = items.map((item) => item.productId);
-  const { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .in("id", ids);
-
-  if (error || !products || products.length === 0) {
-    return NextResponse.json({ error: "No se pudieron cargar los productos" }, { status: 400 });
-  }
-
-  const line_items = items.map((item) => {
-    const product = products.find((p) => p.id === item.productId);
-    if (!product) throw new Error(`Producto ${item.productId} no encontrado`);
-
-    return {
-      quantity: item.quantity,
-      price_data: {
-        currency: product.currency.toLowerCase(),
-        unit_amount: Math.round(product.price * 100),
-        product_data: {
-          name: product.name,
-          // El webhook lo lee para saber qué producto se vendió.
-          metadata: { product_id: product.id },
-          images: product.image_url
-            ? [new URL(product.image_url, request.url).toString()]
-            : undefined,
-        },
-      },
-    };
-  });
-
-  const origin = new URL(request.url).origin;
   // Comprar sin cuenta sigue permitido; si hay sesión, el pedido queda en su historial.
   const user = await getCurrentUser();
 
   try {
-    const session = await getStripe().checkout.sessions.create({
-      mode: "payment",
-      line_items,
-      client_reference_id: user?.id,
-      customer_email: user?.email,
-      success_url: `${origin}/carrito/exito?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/carrito`,
+    // El pedido nace "pending" con precios leídos de la base; su id es la
+    // referencia que Wompi nos devuelve al confirmar el pago.
+    const { data, error } = await getSupabaseAdmin()
+      .rpc("create_pending_order", {
+        p_user_id: user?.id ?? null,
+        p_customer_email: user?.email ?? null,
+        p_items: items.map((i) => ({ product_id: i.productId, quantity: i.quantity })),
+      })
+      .single<{ order_id: string; amount_total: number; currency: string }>();
+    if (error || !data) throw new Error(error?.message ?? "No se pudo crear el pedido");
+
+    const url = checkoutUrl({
+      reference: data.order_id,
+      amountInCents: Math.round(Number(data.amount_total) * 100),
+      currency: data.currency,
+      redirectUrl: `${new URL(request.url).origin}/carrito/exito`,
+      customerEmail: user?.email,
     });
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url });
   } catch (err) {
     const message = err instanceof Error ? err.message : "No se pudo iniciar el pago";
     return NextResponse.json({ error: message }, { status: 500 });

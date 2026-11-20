@@ -37,7 +37,7 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
 });
 
 export function formatPrice(price: number, currency: string): string {
-  return new Intl.NumberFormat("es-AR", {
+  return new Intl.NumberFormat("es-CO", {
     style: "currency",
     currency,
     maximumFractionDigits: 0,

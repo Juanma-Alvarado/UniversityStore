@@ -2,7 +2,7 @@ import { ReviewForm } from "@/components/review-form";
 import { Stars } from "@/components/stars";
 import { getProductReviews, summarize } from "@/lib/reviews";
 
-const dateFormat = new Intl.DateTimeFormat("es-AR", {
+const dateFormat = new Intl.DateTimeFormat("es-CO", {
   day: "numeric",
   month: "short",
   year: "numeric",

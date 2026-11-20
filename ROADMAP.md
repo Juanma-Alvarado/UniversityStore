@@ -17,7 +17,7 @@ El marketplace de los emprendimientos universitarios — pero empieza como tiend
 | Modelado 3D | Blender → glTF/GLB | Descartado por ahora, ver nota de arriba |
 | Transiciones de página | View Transitions API | Reemplaza a Barba.js (pensado para vanilla JS) |
 | Datos + cuentas | Supabase | Postgres + Auth + Storage, escala a multi-vendedor sin migrar |
-| Pagos | Stripe → Stripe Connect | Checkout simple ahora, split de pagos cuando haya más vendedores |
+| Pagos | Wompi (COP) | PSE, tarjetas y Nequi con checkout alojado. Stripe se descartó: no opera en Colombia ni tiene PSE. Para el split de la Fase 3 evaluar Wompi vs Mercado Pago |
 | Hosting | Vercel | Soporte nativo de Next.js |
 
 ## Dirección de diseño
@@ -41,7 +41,7 @@ Dirección actual, inspirada en apps como Rappi: color dominante vibrante (no un
 - Wireframes de Home, producto, carrito y checkout
 
 ### Fase 1 — Tienda personal (MVP)
-Funcionalidades: catálogo (listado + detalle), carrito, checkout real con Stripe, mobile-first, SEO básico.
+Funcionalidades: catálogo (listado + detalle), carrito, checkout real (empezó con Stripe, hoy Wompi en COP), mobile-first, SEO básico.
 Diseño: hero 3D interactivo, grid de productos con hover, checkout simple sin sacrificar conversión.
 
 ### Fase 2 — Comunidad y descubrimiento (funcionalidad completa)
@@ -53,17 +53,18 @@ Hecho:
 - Favoritos: tabla `favorites` con RLS por usuario, corazón en cada card y en el detalle (optimista), página `/favoritos` enlazada desde `/cuenta`
 - Reseñas: tabla `reviews` (una por usuario y producto, 1–5 estrellas + comentario opcional), promedio y listado en el detalle del producto, alta/edición/borrado con Server Actions. Por ahora puede opinar cualquier usuario logueado; cuando exista el historial de pedidos se puede limitar a quienes compraron
 
-- Historial de pedidos: tablas `orders` + `order_items` (nombre y precio congelados al comprar), escritas solo por el webhook de Stripe (`/api/stripe/webhook`) vía la función `record_order` — atómica, idempotente ante reintentos de Stripe y descuenta stock de los productos que no son por encargo. Página `/pedidos` enlazada desde `/cuenta`. Comprar sin cuenta sigue permitido (el pedido queda sin usuario)
+- Historial de pedidos: tablas `orders` + `order_items` (nombre y precio congelados al comprar). El pedido nace `pending` al tocar "Finalizar compra" (`create_pending_order`, precios leídos de la base) y su id es la referencia de Wompi. Se confirma por dos vías idempotentes que llaman a `apply_payment_result`: el evento firmado `transaction.updated` en `/api/wompi/events` y la página de retorno `/carrito/exito` (verifica que la transacción sea de nuestro comercio). Al pagarse descuenta stock de lo que no es por encargo. Página `/pedidos` enlazada desde `/cuenta`. Comprar sin cuenta sigue permitido
 
-Falta (funcionalidad lista, pendiente de claves): probar el flujo completo de pago → webhook → pedido con Stripe en modo test.
+Falta: probar una compra de punta a punta en el sandbox de Wompi.
 Diseño: contenido "detrás del emprendimiento", transiciones fluidas entre categorías.
 
 ### Fase 3 — Marketplace multi-vendedor (visión final)
-Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard de vendedor, pagos divididos (Stripe Connect), buscador/filtros por categoría-facultad-precio, mensajería comprador-vendedor, moderación.
+Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard de vendedor, pagos divididos (proveedor a definir: Wompi o Mercado Pago), buscador/filtros por categoría-facultad-precio, mensajería comprador-vendedor, moderación.
 Diseño: vitrina personalizable por vendedor dentro de los límites de marca, feed de descubrimiento.
 
 ## Próximos pasos inmediatos
-1. Cargar en `.env.local` las claves que faltan (ver `.env.local.example`): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` y `SUPABASE_SECRET_KEY`. En local, el secret del webhook sale de `stripe listen --forward-to localhost:3000/api/stripe/webhook`
-2. En Supabase → Authentication → URL Configuration: agregar `http://localhost:3000/auth/callback` (y el dominio real cuando se deploye) a las Redirect URLs
-3. Probar una compra de punta a punta con tarjeta de test y verla en `/pedidos`
-4. Opcional antes de Fase 3: limitar las reseñas a quienes compraron el producto, y marcar pedidos como reembolsados (evento `charge.refunded`)
+1. Aplicar la migración `20261120180000_orders_for_wompi.sql` en Supabase (SQL Editor): pasa precios a COP y adapta `orders` a Wompi
+2. Crear cuenta en comercios.wompi.co y cargar en `.env.local` las llaves de prueba: `WOMPI_PUBLIC_KEY`, `WOMPI_INTEGRITY_SECRET`, `WOMPI_EVENTS_SECRET` (ver `.env.local.example`)
+3. Probar una compra en el sandbox (PSE con "Banco que aprueba", o tarjeta `4242 4242 4242 4242`) y verla en `/pedidos`
+4. Al deployar: configurar en Wompi la URL de eventos `https://<dominio>/api/wompi/events` (sandbox y producción por separado) y agregar el dominio a las Redirect URLs de Supabase Auth
+5. Opcional antes de Fase 3: limitar las reseñas a quienes compraron, y limpiar pedidos `pending` abandonados

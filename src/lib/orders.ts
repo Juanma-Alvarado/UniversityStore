@@ -42,6 +42,8 @@ export async function getMyOrders(): Promise<Order[]> {
     .select(
       "id, status, amount_total, currency, created_at, order_items(id, product_name, unit_price, quantity, products(slug, image_url))",
     )
+    // Los pendientes (pago sin terminar) y fallidos no son compras.
+    .in("status", ["paid", "refunded"])
     .order("created_at", { ascending: false })
     .returns<OrderRow[]>();
 

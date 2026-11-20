@@ -4,7 +4,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 let admin: SupabaseClient | null = null;
 
 // Cliente con la secret key: saltea RLS. Solo para código de server que no
-// actúa en nombre de un usuario (p. ej. el webhook de Stripe). Nunca
+// actúa en nombre de un usuario (p. ej. crear pedidos y aplicar los eventos de Wompi). Nunca
 // importarlo desde un componente cliente.
 export function getSupabaseAdmin(): SupabaseClient {
   if (!process.env.SUPABASE_SECRET_KEY) {

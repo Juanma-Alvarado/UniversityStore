@@ -59,7 +59,7 @@ async function OrderList() {
 }
 
 function OrderCard({ order }: { order: Order }) {
-  const date = new Intl.DateTimeFormat("es-AR", {
+  const date = new Intl.DateTimeFormat("es-CO", {
     day: "numeric",
     month: "long",
     year: "numeric",
