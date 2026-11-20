@@ -23,7 +23,7 @@ export async function updateDisplayName(
     .from("profiles")
     .update({ display_name: displayName })
     .eq("id", user.id);
-  if (error) return { ok: false, message: "No se pudo guardar. Probá de nuevo." };
+  if (error) return { ok: false, message: "No se pudo guardar. Intenta de nuevo." };
 
   // Mantiene el metadata en sync para que el header muestre la inicial correcta.
   await supabase.auth.updateUser({ data: { display_name: displayName } });

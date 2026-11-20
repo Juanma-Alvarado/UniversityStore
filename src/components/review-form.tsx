@@ -68,7 +68,7 @@ function Form({ productId, own }: { productId: string; own: Review | null }) {
     >
       <input type="hidden" name="productId" value={productId} />
       <h3 className="font-display text-lg font-bold">
-        {own ? "Tu reseña" : "Dejá tu reseña"}
+        {own ? "Tu reseña" : "Deja tu reseña"}
       </h3>
 
       <fieldset className="flex flex-wrap items-center gap-3">

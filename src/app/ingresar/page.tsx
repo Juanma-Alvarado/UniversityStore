@@ -3,7 +3,7 @@ import { AuthForm } from "@/components/auth-form";
 
 export const metadata = {
   title: "Ingresar",
-  description: "Entrá a tu cuenta o creá una nueva.",
+  description: "Entra a tu cuenta o crea una nueva.",
   robots: { index: false },
 };
 

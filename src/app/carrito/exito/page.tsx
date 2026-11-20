@@ -38,7 +38,7 @@ async function Confirmation({ searchParams }: Props) {
       <>
         <h1 className="font-display text-3xl font-extrabold">No encontramos tu pago</h1>
         <p className="text-foreground-soft">
-          Si ya pagaste y ves esto, escribinos para confirmar tu compra.
+          Si ya pagaste y ves esto, escríbenos para confirmar tu compra.
         </p>
         <Link href="/productos" className={primaryButton}>
           Volver a productos
@@ -63,7 +63,7 @@ async function Confirmation({ searchParams }: Props) {
         </span>
         <h1 className="font-display text-3xl font-extrabold">¡Gracias por tu compra!</h1>
         <p className="text-foreground-soft">
-          Pagaste {total}. Te vamos a contactar para coordinar la entrega.
+          Pagaste {total}. Te contactaremos para coordinar la entrega.
         </p>
         <div className="flex flex-wrap gap-3">
           <Link href="/productos" className={primaryButton}>

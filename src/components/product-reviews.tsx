@@ -40,7 +40,7 @@ export async function ProductReviews({
       <ReviewForm productId={productId} productSlug={productSlug} reviews={reviews} />
 
       {count === 0 ? (
-        <p className="text-foreground-soft">Todavía nadie opinó. ¡Estrená la sección!</p>
+        <p className="text-foreground-soft">Todavía nadie ha opinado. ¡Sé el primero!</p>
       ) : (
         <ul className="flex flex-col gap-3">
           {reviews.map((review) => (

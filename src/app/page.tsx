@@ -57,7 +57,7 @@ async function FeaturedProducts() {
   if (products.length === 0) {
     return (
       <p className="text-foreground-soft">
-        Pronto vas a encontrar acá los primeros productos.
+        Pronto vas a encontrar aquí los primeros productos.
       </p>
     );
   }

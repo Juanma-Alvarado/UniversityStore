@@ -37,7 +37,7 @@ async function OrderList() {
       <div className="flex flex-col items-start gap-4 rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
         <p className="text-foreground-soft">
           Todavía no hiciste ningún pedido. Cuando compres con tu cuenta iniciada, lo vas a ver
-          acá.
+          aquí.
         </p>
         <Link
           href="/productos"

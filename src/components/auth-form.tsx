@@ -9,7 +9,7 @@ type Mode = "login" | "signup";
 
 const ERRORS: Record<string, string> = {
   "Invalid login credentials": "Email o contraseña incorrectos.",
-  "Email not confirmed": "Todavía no confirmaste tu email. Revisá tu bandeja de entrada.",
+  "Email not confirmed": "Todavía no confirmaste tu correo. Revisa tu bandeja de entrada.",
   "User already registered": "Ya existe una cuenta con ese email.",
 };
 
@@ -19,7 +19,7 @@ function translate(message: string) {
     return "La contraseña tiene que tener al menos 6 caracteres.";
   }
   if (message.toLowerCase().includes("rate limit")) {
-    return "Demasiados intentos. Esperá unos minutos y probá de nuevo.";
+    return "Demasiados intentos. Espera unos minutos e intenta de nuevo.";
   }
   return message;
 }
@@ -32,7 +32,7 @@ export function AuthForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(
     searchParams.get("error") === "link"
-      ? "El link de confirmación venció o ya se usó. Probá ingresar de nuevo."
+      ? "El enlace de confirmación venció o ya se usó. Intenta ingresar de nuevo."
       : null,
   );
   const [sentTo, setSentTo] = useState<string | null>(null);
@@ -87,10 +87,10 @@ export function AuthForm() {
     return (
       <div className="flex flex-col items-start gap-3 rounded-[28px] bg-surface p-7 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
         <span className="text-4xl">📬</span>
-        <h1 className="font-display text-2xl font-extrabold">Revisá tu mail</h1>
+        <h1 className="font-display text-2xl font-extrabold">Revisa tu correo</h1>
         <p className="text-foreground-soft">
-          Te mandamos un link a <strong className="text-foreground">{sentTo}</strong> para
-          confirmar tu cuenta. Abrilo desde este mismo navegador.
+          Te enviamos un enlace a <strong className="text-foreground">{sentTo}</strong> para
+          confirmar tu cuenta. Ábrelo desde este mismo navegador.
         </p>
       </div>
     );
@@ -119,12 +119,12 @@ export function AuthForm() {
       </div>
 
       <h1 className="mb-1 font-display text-3xl font-extrabold">
-        {isLogin ? "¡Hola de nuevo!" : "Sumate"}
+        {isLogin ? "¡Hola de nuevo!" : "Únete"}
       </h1>
       <p className="mb-6 text-sm text-foreground-soft">
         {isLogin
-          ? "Entrá para ver tus favoritos y tus pedidos."
-          : "Guardá favoritos, dejá reviews y seguí tus pedidos."}
+          ? "Entra para ver tus favoritos y tus pedidos."
+          : "Guarda favoritos, deja reseñas y sigue tus pedidos."}
       </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
