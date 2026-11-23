@@ -12,6 +12,7 @@ export type Product = {
   stock: number;
   made_to_order: boolean;
   category: string;
+  venture_id: string | null;
   created_at: string;
 };
 

@@ -3,7 +3,9 @@ import Link from "next/link";
 import { HeroVisual } from "@/components/hero-visual";
 import { ProductCard } from "@/components/product-card";
 import { ProductGridSkeleton } from "@/components/product-grid-skeleton";
+import { VentureCard, VentureGridSkeleton } from "@/components/venture-card";
 import { getProducts } from "@/lib/products";
+import { getVentures } from "@/lib/ventures";
 
 export default function Home() {
   return (
@@ -46,6 +48,16 @@ export default function Home() {
         <Suspense fallback={<ProductGridSkeleton />}>
           <FeaturedProducts />
         </Suspense>
+
+        <div className="mb-5 mt-14 flex items-baseline justify-between">
+          <h2 className="font-display text-xl font-bold">Detrás de cada producto</h2>
+          <Link href="/emprendimientos" className="text-sm font-bold text-primary">
+            Ver todos
+          </Link>
+        </div>
+        <Suspense fallback={<VentureGridSkeleton />}>
+          <FeaturedVentures />
+        </Suspense>
       </main>
     </div>
   );
@@ -66,6 +78,26 @@ async function FeaturedProducts() {
     <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
+}
+
+async function FeaturedVentures() {
+  const ventures = await getVentures();
+
+  if (ventures.length === 0) {
+    return (
+      <p className="text-foreground-soft">
+        Pronto vas a conocer aquí a los emprendimientos de la tienda.
+      </p>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+      {ventures.slice(0, 4).map((venture) => (
+        <VentureCard key={venture.id} venture={venture} />
       ))}
     </div>
   );

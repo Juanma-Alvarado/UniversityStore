@@ -5,8 +5,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCart } from "@/components/add-to-cart";
 import { FavoriteButton } from "@/components/favorite-button";
+import { MadeBy, MadeBySkeleton } from "@/components/made-by";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ProductReviews, ProductReviewsSkeleton } from "@/components/product-reviews";
 import { formatPrice, getProductBySlug } from "@/lib/products";
+import { STORE_WHATSAPP } from "@/lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -93,6 +96,19 @@ async function ProductDetail({ params }: Props) {
           </span>
           <p className="text-foreground-soft">{product.description}</p>
           <AddToCart product={product} />
+          {product.venture_id ? (
+            <Suspense fallback={<MadeBySkeleton />}>
+              <MadeBy ventureId={product.venture_id} productName={product.name} />
+            </Suspense>
+          ) : (
+            STORE_WHATSAPP && (
+              <WhatsAppButton
+                phone={STORE_WHATSAPP}
+                message={`Hola, vi "${product.name}" en UniversityStore y quiero hacer un pedido.`}
+                className="w-full"
+              />
+            )
+          )}
         </div>
       </div>
       <Suspense fallback={<ProductReviewsSkeleton />}>

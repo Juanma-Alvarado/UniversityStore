@@ -22,6 +22,12 @@ export function Header() {
             Productos
           </Link>
           <Link
+            href="/emprendimientos"
+            className="hidden rounded-full px-4 py-2 text-sm font-bold text-foreground-soft hover:text-foreground sm:inline-block"
+          >
+            Emprendimientos
+          </Link>
+          <Link
             href="/carrito"
             className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-line bg-surface text-lg"
           >
