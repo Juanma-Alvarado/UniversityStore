@@ -58,3 +58,54 @@ body {
   color: var(--fg);
   font-family: var(--font-sans);
 }
+
+/* ---------- View Transitions: filtro de categorías en /productos ---------- */
+
+/* Durante la animación los clics pasan a la página real en vez de perderse. */
+::view-transition {
+  pointer-events: none;
+}
+
+/* Al filtrar, lo que no es una card cambia en el acto: la página nueva se ve en
+   vivo (sin fundido), así la píldora de los chips se desliza sin un "fantasma"
+   de su posición anterior. */
+html:active-view-transition-type(category-filter)::view-transition-old(root) {
+  display: none;
+}
+html:active-view-transition-type(category-filter)::view-transition-new(root) {
+  animation: none;
+}
+
+/* La card que sale se achica y se desvanece rápido... */
+::view-transition-old(.catalog-exit) {
+  animation: 160ms ease-in both catalog-pop reverse;
+}
+/* ...la que entra espera a que salga la otra y aparece con un pequeño rebote... */
+::view-transition-new(.catalog-enter) {
+  animation: 320ms cubic-bezier(0.34, 1.4, 0.64, 1) 120ms both catalog-pop;
+}
+/* ...y las que se quedan se deslizan a su nuevo lugar en la grilla. */
+::view-transition-group(.catalog-move) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes catalog-pop {
+  from {
+    opacity: 0;
+    scale: 0.85;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
