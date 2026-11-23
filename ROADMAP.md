@@ -55,16 +55,21 @@ Hecho:
 
 - Historial de pedidos: tablas `orders` + `order_items` (nombre y precio congelados al comprar). El pedido nace `pending` al tocar "Finalizar compra" (`create_pending_order`, precios leídos de la base) y su id es la referencia de Wompi. Se confirma por dos vías idempotentes que llaman a `apply_payment_result`: el evento firmado `transaction.updated` en `/api/wompi/events` y la página de retorno `/carrito/exito` (verifica que la transacción sea de nuestro comercio). Al pagarse descuenta stock de lo que no es por encargo. Página `/pedidos` enlazada desde `/cuenta`. Comprar sin cuenta sigue permitido
 
-Falta: probar una compra de punta a punta en el sandbox de Wompi.
+Falta: probar una compra de punta a punta en el sandbox de Wompi — **en pausa** (Wompi no se va a usar de momento; el código queda listo pero sin llaves).
 Diseño: contenido "detrás del emprendimiento", transiciones fluidas entre categorías.
+
+- Transiciones entre categorías (hecho): en `/productos` el filtro corre en el cliente (`CategoryCatalog`) y cambia la URL con `pushState`, sin ir al servidor. Con `<ViewTransition>` de React las cards que salen se achican, las que entran aparecen con rebote y las que se quedan se deslizan; el fondo del chip activo es una píldora que se desliza entre chips. Respeta `prefers-reduced-motion`. El botón "atrás" del navegador cambia el filtro sin animar (React no anima navegaciones del historial)
 
 ### Fase 3 — Marketplace multi-vendedor (visión final)
 Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard de vendedor, pagos divididos (proveedor a definir: Wompi o Mercado Pago), buscador/filtros por categoría-facultad-precio, mensajería comprador-vendedor, moderación.
 Diseño: vitrina personalizable por vendedor dentro de los límites de marca, feed de descubrimiento.
 
 ## Próximos pasos inmediatos
-1. Aplicar la migración `20261120180000_orders_for_wompi.sql` en Supabase (SQL Editor): pasa precios a COP y adapta `orders` a Wompi
-2. Crear cuenta en comercios.wompi.co y cargar en `.env.local` las llaves de prueba: `WOMPI_PUBLIC_KEY`, `WOMPI_INTEGRITY_SECRET`, `WOMPI_EVENTS_SECRET` (ver `.env.local.example`)
-3. Probar una compra en el sandbox (PSE con "Banco que aprueba", o tarjeta `4242 4242 4242 4242`) y verla en `/pedidos`
-4. Al deployar: configurar en Wompi la URL de eventos `https://<dominio>/api/wompi/events` (sandbox y producción por separado) y agregar el dominio a las Redirect URLs de Supabase Auth
-5. Opcional antes de Fase 3: limitar las reseñas a quienes compraron, y limpiar pedidos `pending` abandonados
+1. Diseño de Fase 2: contenido "detrás del emprendimiento" (necesita textos y fotos reales de cada emprendimiento)
+
+### En pausa: pagos con Wompi
+La integración está hecha pero Wompi no se va a usar de momento. Cuando se retome:
+1. Crear cuenta en comercios.wompi.co y cargar en `.env.local` las llaves de prueba: `WOMPI_PUBLIC_KEY`, `WOMPI_INTEGRITY_SECRET`, `WOMPI_EVENTS_SECRET` (ver `.env.local.example`). La migración `20261120180000_orders_for_wompi.sql` ya está aplicada
+2. Probar una compra en el sandbox (PSE con "Banco que aprueba", o tarjeta `4242 4242 4242 4242`) y verla en `/pedidos`
+3. Al deployar: configurar en Wompi la URL de eventos `https://<dominio>/api/wompi/events` (sandbox y producción por separado) y agregar el dominio a las Redirect URLs de Supabase Auth
+4. Después: limitar las reseñas a quienes compraron, y limpiar pedidos `pending` abandonados
