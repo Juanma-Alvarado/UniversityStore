@@ -67,6 +67,11 @@ Diseño: contenido "detrás del emprendimiento", transiciones fluidas entre cate
 Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard de vendedor, pagos divididos (proveedor a definir: Wompi o Mercado Pago), buscador/filtros por categoría-facultad-precio, mensajería comprador-vendedor, moderación.
 Diseño: vitrina personalizable por vendedor dentro de los límites de marca, feed de descubrimiento.
 
+## Publicación
+En producción: https://university-store-xi.vercel.app (Vercel, equipo `alwars`, se despliega con cada push a `main`).
+
+Variables en Vercel: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` y `NEXT_PUBLIC_SITE_URL` como **Config** (si quedan como Secret no llegan al build y falla con "supabaseUrl is required"); `SUPABASE_SECRET_KEY` como **Secret**; `STORE_WHATSAPP`. Sin las de Wompi el carrito funciona por WhatsApp.
+
 ## Próximos pasos inmediatos
 1. Confirmar nombres de los emprendimientos (Prensaditos y STUD son provisionales) y completar sus historias en Supabase
 2. Cargar el producto de Flovera (falta el precio de los ramos)
