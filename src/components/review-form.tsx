@@ -29,7 +29,7 @@ export function ReviewForm({ productId, productSlug, reviews }: Props) {
   if (!user) {
     return (
       <div className="flex flex-col items-start gap-3 rounded-[24px] bg-surface p-5 shadow-[0_4px_16px_rgba(24,21,17,0.08)] sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-foreground-soft">¿Lo probaste? Contale al resto qué te pareció.</p>
+        <p className="text-sm text-foreground-soft">¿Lo probaste? Cuéntale al resto qué te pareció.</p>
         <Link
           href={`/ingresar?next=${encodeURIComponent(`/productos/${productSlug}`)}`}
           className="rounded-full bg-foreground px-5 py-2.5 text-sm font-bold text-background"
