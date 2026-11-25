@@ -36,7 +36,7 @@ async function OrderList() {
     return (
       <div className="flex flex-col items-start gap-4 rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
         <p className="text-foreground-soft">
-          Todavía no hiciste ningún pedido. Cuando compres con tu cuenta iniciada, lo vas a ver
+          Todavía no has hecho ningún pedido. Cuando pidas con tu cuenta iniciada, lo verás
           aquí.
         </p>
         <Link
@@ -74,7 +74,11 @@ function OrderCard({ order }: { order: Order }) {
             Pedido #{order.id.slice(0, 8).toUpperCase()}
           </p>
         </div>
-        {order.status === "paid" ? (
+        {order.status === "requested" ? (
+          <span className="rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink">
+            Pedido por WhatsApp
+          </span>
+        ) : order.status === "paid" ? (
           <span className="rounded-full bg-primary-tint px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-primary">
             Pagado
           </span>

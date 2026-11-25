@@ -12,7 +12,7 @@ export type OrderItem = {
 
 export type Order = {
   id: string;
-  status: "paid" | "refunded";
+  status: "requested" | "paid" | "refunded";
   amountTotal: number;
   currency: string;
   createdAt: string;
@@ -21,7 +21,7 @@ export type Order = {
 
 type OrderRow = {
   id: string;
-  status: "paid" | "refunded";
+  status: "requested" | "paid" | "refunded";
   amount_total: number;
   currency: string;
   created_at: string;
@@ -42,8 +42,9 @@ export async function getMyOrders(): Promise<Order[]> {
     .select(
       "id, status, amount_total, currency, created_at, order_items(id, product_name, unit_price, quantity, products(slug, image_url))",
     )
-    // Los pendientes (pago sin terminar) y fallidos no son compras.
-    .in("status", ["paid", "refunded"])
+    // Los pendientes (pago sin terminar) y fallidos no son compras; los
+    // "requested" son pedidos enviados por WhatsApp.
+    .in("status", ["requested", "paid", "refunded"])
     .order("created_at", { ascending: false })
     .returns<OrderRow[]>();
 
