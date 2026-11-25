@@ -32,6 +32,11 @@ function apiBase(): string {
     : "https://production.wompi.co/v1";
 }
 
+// Sin llaves la tienda toma pedidos por WhatsApp en lugar de cobrar en línea.
+export function isWompiConfigured(): boolean {
+  return Boolean(process.env.WOMPI_PUBLIC_KEY && process.env.WOMPI_INTEGRITY_SECRET);
+}
+
 // Falla antes de crear el pedido si faltan llaves, para no dejar pedidos huérfanos.
 export function assertWompiConfigured() {
   requireEnv("WOMPI_PUBLIC_KEY");
