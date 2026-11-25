@@ -1,10 +1,14 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 
 // Cliente por request que lee/escribe la sesión en cookies.
 // Nunca compartirlo entre requests.
 export async function createSupabaseServerClient() {
+  // La sesión de Supabase usa Date.now() para ver si el token venció: con Cache
+  // Components eso solo se permite cuando el render ya es por request.
+  await connection();
   const cookieStore = await cookies();
 
   return createServerClient(
