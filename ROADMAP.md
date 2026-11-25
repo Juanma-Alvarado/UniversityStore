@@ -61,6 +61,7 @@ Diseño: contenido "detrás del emprendimiento", transiciones fluidas entre cate
 - Transiciones entre categorías (hecho): en `/productos` el filtro corre en el cliente (`CategoryCatalog`) y cambia la URL con `pushState`, sin ir al servidor. Con `<ViewTransition>` de React las cards que salen se achican, las que entran aparecen con rebote y las que se quedan se deslizan; el fondo del chip activo es una píldora que se desliza entre chips. Respeta `prefers-reduced-motion`. El botón "atrás" del navegador cambia el filtro sin animar (React no anima navegaciones del historial)
 - Detrás del emprendimiento (hecho): tabla `ventures` (historia, foto, Instagram, WhatsApp) y `products.venture_id`. Páginas `/emprendimientos` y `/emprendimientos/[slug]` (historia + sus productos), tarjeta "Hecho por" en la ficha y sección "Detrás de cada producto" en la home. Primeros emprendimientos reales de la universidad: Prensaditos, Flovera y STUD (fotos y textos de sus publicaciones). Las camisetas y los zuecos son productos propios, sin emprendimiento asociado
 - Botón "Pedir por WhatsApp" por emprendimiento, visible solo si `ventures.whatsapp` tiene número (indicativo + número, solo dígitos)
+- Carrito por WhatsApp (mientras Wompi está en pausa): sin llaves de Wompi, "Finalizar compra" pasa a "Pedir por WhatsApp". El pedido se registra con `create_whatsapp_order` (estado `requested`, canal `whatsapp`, precios de la base) y se arma un mensaje por destinatario: cada emprendimiento con su número, y la tienda (`STORE_WHATSAPP`) para los productos propios o emprendimientos sin número. Se ve en `/pedidos` como "Pedido por WhatsApp". Con las llaves de Wompi vuelve solo al pago en línea
 
 ### Fase 3 — Marketplace multi-vendedor (visión final)
 Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard de vendedor, pagos divididos (proveedor a definir: Wompi o Mercado Pago), buscador/filtros por categoría-facultad-precio, mensajería comprador-vendedor, moderación.
@@ -69,7 +70,7 @@ Diseño: vitrina personalizable por vendedor dentro de los límites de marca, fe
 ## Próximos pasos inmediatos
 1. Confirmar nombres de los emprendimientos (Prensaditos y STUD son provisionales) y completar sus historias en Supabase
 2. Cargar el producto de Flovera (falta el precio de los ramos)
-3. Reemplazar el WhatsApp de prueba (`573000000000`, cargado en los tres emprendimientos para ver el botón) por el real de cada emprendedor cuando confirme que quiere aparecer
+3. Reemplazar el WhatsApp de prueba (`573000000000`, en los tres emprendimientos y en `STORE_WHATSAPP`) por el real de cada uno cuando confirme que quiere aparecer
 
 ### En pausa: pagos con Wompi
 La integración está hecha pero Wompi no se va a usar de momento. Cuando se retome:
