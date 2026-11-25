@@ -1,3 +1,5 @@
+import { whatsappUrl } from "@/lib/whatsapp";
+
 /** Abre WhatsApp con un mensaje ya escrito. `phone`: indicativo + número, solo dígitos. */
 export function WhatsAppButton({
   phone,
@@ -8,7 +10,7 @@ export function WhatsAppButton({
   message: string;
   className?: string;
 }) {
-  const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  const href = whatsappUrl(phone, message);
 
   return (
     <a
