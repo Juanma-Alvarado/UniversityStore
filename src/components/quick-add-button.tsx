@@ -32,7 +32,7 @@ export function QuickAddButton({ product }: { product: Product }) {
       onClick={handleClick}
       disabled={soldOut}
       aria-label={`Agregar ${product.name} al carrito`}
-      className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-xl font-extrabold text-white transition-transform hover:scale-105 disabled:bg-foreground-soft disabled:text-background"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-xl font-extrabold text-white shadow-glow transition-transform hover:scale-110 disabled:bg-foreground-soft disabled:text-background"
     >
       +
     </button>
