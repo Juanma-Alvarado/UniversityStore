@@ -92,10 +92,12 @@ export function CartView({ checkoutMode }: { checkoutMode: CheckoutMode }) {
   if (items.length === 0) {
     return (
       <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-start gap-4 px-6 py-16">
-        <h1 className="font-display text-3xl font-extrabold">Tu carrito está vacío</h1>
+        <h1 className="page-title">
+          Tu carrito está <span className="text-primary">vacío</span>
+        </h1>
         <Link
           href="/productos"
-          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white"
+          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-glow transition-transform hover:scale-[1.03]"
         >
           Ver productos
         </Link>
@@ -107,13 +109,15 @@ export function CartView({ checkoutMode }: { checkoutMode: CheckoutMode }) {
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
-      <h1 className="mb-6 font-display text-3xl font-extrabold">Tu carrito</h1>
+      <h1 className="page-title mb-8">
+        Tu <span className="text-primary">carrito</span>
+      </h1>
 
       <div className="flex flex-col gap-3">
         {items.map((item) => (
           <div
             key={item.productId}
-            className="flex items-center gap-4 rounded-[20px] bg-surface p-3.5 shadow-[0_4px_16px_rgba(24,21,17,0.08)]"
+            className="panel flex items-center gap-4 rounded-[20px] p-3.5"
           >
             <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-2xl bg-primary-tint">
               {item.imageUrl && (
@@ -134,7 +138,7 @@ export function CartView({ checkoutMode }: { checkoutMode: CheckoutMode }) {
               </span>
             </div>
 
-            <div className="flex items-center gap-1 rounded-full bg-background p-1">
+            <div className="flex items-center gap-1 rounded-full border border-line bg-background p-1">
               <button
                 type="button"
                 aria-label="Restar cantidad"
@@ -167,7 +171,7 @@ export function CartView({ checkoutMode }: { checkoutMode: CheckoutMode }) {
         ))}
       </div>
 
-      <div className="mt-6 flex items-center justify-between rounded-[20px] bg-surface px-5 py-4 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
+      <div className="panel mt-6 flex items-center justify-between rounded-[20px] px-5 py-4">
         <span className="text-sm font-bold text-foreground-soft">Subtotal</span>
         <span className="font-display text-xl font-extrabold">
           {formatPrice(subtotal, currency)}
@@ -179,7 +183,7 @@ export function CartView({ checkoutMode }: { checkoutMode: CheckoutMode }) {
           type="button"
           onClick={handleCheckout}
           disabled={loading}
-          className="mt-4 w-full rounded-full bg-primary px-6 py-4 text-sm font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-60"
+          className="mt-4 w-full rounded-full bg-primary px-6 py-4 text-sm font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-60 shadow-glow"
         >
           {loading ? "Redirigiendo a pago..." : "Finalizar compra"}
         </button>
@@ -217,7 +221,9 @@ function SentOrder({ order, onDone }: { order: WhatsAppOrder; onDone: () => void
       <span className="rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink">
         Pedido #{reference}
       </span>
-      <h1 className="mt-4 font-display text-3xl font-extrabold">¡Tu pedido está listo!</h1>
+      <h1 className="page-title mt-5">
+        ¡Tu pedido está <span className="text-primary">listo</span>!
+      </h1>
       <p className="mt-2 max-w-md text-foreground-soft">
         {several
           ? `Tu carrito tiene productos de ${order.groups.length} emprendimientos. Envía el mensaje a cada uno para coordinar el pago y la entrega.`
@@ -230,7 +236,7 @@ function SentOrder({ order, onDone }: { order: WhatsAppOrder; onDone: () => void
           return (
             <li
               key={group.key}
-              className="flex flex-wrap items-center justify-between gap-3 rounded-[20px] bg-surface p-4 shadow-[0_4px_16px_rgba(24,21,17,0.08)]"
+              className="panel flex flex-wrap items-center justify-between gap-3 rounded-[20px] p-4"
             >
               <div className="flex flex-col">
                 <span className="font-display text-lg font-extrabold">{group.recipient}</span>
