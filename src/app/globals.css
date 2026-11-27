@@ -106,6 +106,44 @@ h3 {
   }
 }
 
+/* Tarjeta de vidrio: formularios, resúmenes, listas (carrito, cuenta, pedidos, reseñas). */
+@utility panel {
+  border: 1px solid var(--line);
+  background-color: color-mix(in oklab, var(--surface) 85%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 18px -6px rgba(24, 21, 17, 0.12);
+}
+
+/* Título de página grande que entra subiendo. El acento va en <span class="text-primary">. */
+@utility page-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  @media (width >= 40rem) {
+    font-size: 3.5rem;
+  }
+}
+
+/* Campo de formulario con anillo verde al enfocar. */
+@utility field {
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background-color: var(--bg);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 18%, transparent);
+  }
+}
+
 /* Mancha de luz del fondo. */
 @utility blob {
   filter: blur(90px);
@@ -141,6 +179,7 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
   .blob,
   .animate-rise,
+  .page-title,
   .animate-pulse {
     animation: none !important;
   }
