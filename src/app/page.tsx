@@ -44,7 +44,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative grid place-items-center">
-              <div className="absolute h-64 w-64 rounded-full bg-yellow opacity-50 blur-3xl" />
+              <div className="absolute h-64 w-64 rounded-full bg-yellow opacity-[var(--halo-opacity,0.5)] blur-3xl" />
               <HeroVisual />
             </div>
           </div>

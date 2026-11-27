@@ -15,6 +15,8 @@
   /* Luces del fondo y brillo de botones/cards. */
   --glow-strong: 0.22;
   --glow-soft: 0.16;
+  --glow-yellow: 0.22;
+  --halo-opacity: 0.5;
   --shadow-glow: 0 14px 34px -12px rgba(23, 179, 91, 0.55);
 }
 
@@ -28,10 +30,13 @@
     --primary: #1fcb6e;
     --primary-press: #17a85a;
     --primary-tint: #163826;
-    --accent-yellow: #ffcf47;
+    /* Dorado apagado: el amarillo puro satura demasiado sobre fondo oscuro. */
+    --accent-yellow: #dcb75e;
     --secondary: #3fd2bd;
     --glow-strong: 0.12;
     --glow-soft: 0.1;
+    --glow-yellow: 0.04;
+    --halo-opacity: 0.14;
     --shadow-glow: 0 14px 34px -12px rgba(31, 203, 110, 0.45);
   }
 }
@@ -45,10 +50,13 @@
   --primary: #1fcb6e;
   --primary-press: #17a85a;
   --primary-tint: #163826;
-  --accent-yellow: #ffcf47;
+  /* Dorado apagado: el amarillo puro satura demasiado sobre fondo oscuro. */
+  --accent-yellow: #dcb75e;
   --secondary: #3fd2bd;
   --glow-strong: 0.12;
   --glow-soft: 0.1;
+  --glow-yellow: 0.04;
+  --halo-opacity: 0.14;
   --shadow-glow: 0 14px 34px -12px rgba(31, 203, 110, 0.45);
 }
 
