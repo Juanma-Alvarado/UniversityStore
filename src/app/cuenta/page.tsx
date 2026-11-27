@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import { isCurrentUserAdmin } from "@/lib/admin";
 import { requireProfile } from "@/lib/auth";
 import { ProfileForm } from "@/components/profile-form";
 import { SignOutButton } from "@/components/sign-out-button";
@@ -24,6 +25,7 @@ export default function CuentaPage() {
 
 async function AccountDetails() {
   const profile = await requireProfile("/cuenta");
+  const isAdmin = await isCurrentUserAdmin();
   const memberSince = new Intl.DateTimeFormat("es-CO", {
     month: "long",
     year: "numeric",
@@ -70,6 +72,21 @@ async function AccountDetails() {
         </span>
         <span className="text-xl font-bold text-foreground-soft">→</span>
       </Link>
+
+      {isAdmin && (
+        <Link
+          href="/admin"
+          className="panel flex items-center justify-between rounded-[28px] border-primary/40 p-6 transition-transform hover:-translate-y-0.5"
+        >
+          <span className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-xl text-white">
+              ⚙
+            </span>
+            <span className="font-display text-lg font-bold">Panel de administración</span>
+          </span>
+          <span className="text-xl font-bold text-foreground-soft">→</span>
+        </Link>
+      )}
 
       <section className="panel rounded-[28px] p-6">
         <h2 className="mb-4 font-display text-xl font-extrabold">Tus datos</h2>
