@@ -10,6 +10,12 @@
   --primary-press: #0f9148;
   --primary-tint: #d9f5e3;
   --accent-yellow: #ffc527;
+  /* Tercer color (links "Ver todo", categorías, luces): verde azulado derivado del verde. */
+  --secondary: #0d8f80;
+  /* Luces del fondo y brillo de botones/cards. */
+  --glow-strong: 0.22;
+  --glow-soft: 0.16;
+  --shadow-glow: 0 14px 34px -12px rgba(23, 179, 91, 0.55);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +29,10 @@
     --primary-press: #17a85a;
     --primary-tint: #163826;
     --accent-yellow: #ffcf47;
+    --secondary: #3fd2bd;
+    --glow-strong: 0.12;
+    --glow-soft: 0.1;
+    --shadow-glow: 0 14px 34px -12px rgba(31, 203, 110, 0.45);
   }
 }
 
@@ -36,6 +46,10 @@
   --primary-press: #17a85a;
   --primary-tint: #163826;
   --accent-yellow: #ffcf47;
+  --secondary: #3fd2bd;
+  --glow-strong: 0.12;
+  --glow-soft: 0.1;
+  --shadow-glow: 0 14px 34px -12px rgba(31, 203, 110, 0.45);
 }
 
 @theme inline {
@@ -48,15 +62,95 @@
   --color-primary-press: var(--primary-press);
   --color-primary-tint: var(--primary-tint);
   --color-yellow: var(--accent-yellow);
+  --color-secondary: var(--secondary);
+  --shadow-glow: var(--shadow-glow);
   --color-ink: #181511;
-  --font-display: var(--font-baloo);
-  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-archivo);
+  --font-sans: var(--font-instrument);
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Luces y animaciones (dirección visual del rediseño) ---------- */
+
+/* Card que se levanta y brilla en verde al pasar el mouse. */
+@utility card-glow {
+  border: 1px solid var(--line);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
+  &:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in oklab, var(--primary) 60%, transparent);
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+/* Mancha de luz del fondo. */
+@utility blob {
+  filter: blur(90px);
+  animation: drift 18s ease-in-out infinite;
+}
+
+/* Entrada: sube y aparece. Con style={{ animationDelay }} se escalona. */
+@utility animate-rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@utility animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(60px, 40px) scale(1.15);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .animate-rise,
+  .animate-marquee,
+  .animate-pulse {
+    animation: none !important;
+  }
+  .card-glow,
+  .card-glow:hover {
+    transform: none !important;
+  }
 }
 
 /* ---------- View Transitions: filtro de categorías en /productos ---------- */
