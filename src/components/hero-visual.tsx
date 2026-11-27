@@ -27,7 +27,8 @@ export function HeroVisual() {
         )
         .to(ref.current, {
           y: -16,
-          duration: 2.6,
+          rotate: 0,
+          duration: 3,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
@@ -40,12 +41,12 @@ export function HeroVisual() {
   return (
     <div
       ref={ref}
-      className="relative mx-auto w-52 opacity-0 sm:w-64 md:w-72"
+      className="relative mx-auto w-60 opacity-0 sm:w-72 md:w-80"
       style={{ rotate: "-6deg" }}
     >
       <Image
         src="/hero/folded-tshirts.png"
-        alt="Pila de remeras dobladas"
+        alt="Camisetas dobladas de colores"
         width={600}
         height={600}
         priority

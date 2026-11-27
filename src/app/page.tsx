@@ -7,58 +7,110 @@ import { VentureCard, VentureGridSkeleton } from "@/components/venture-card";
 import { getProducts } from "@/lib/products";
 import { getVentures } from "@/lib/ventures";
 
+const MARQUEE_WORDS = ["Ropa", "Comida", "Calzado", "Flores", "Estampados", "Hecho en el campus"];
+
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
-      <div className="mx-auto w-full max-w-5xl px-6 pt-6">
-        <section className="relative overflow-hidden rounded-[28px] bg-primary px-7 py-10 text-white sm:px-10 sm:py-14">
-          <div className="flex flex-col items-center gap-10 sm:min-h-72 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-            <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-              <h1 className="font-display text-4xl font-extrabold leading-tight text-balance sm:text-5xl md:text-6xl">
+      <section className="mx-auto w-full max-w-6xl px-5 pt-8 sm:pt-14">
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-line bg-surface/80 p-8 shadow-sm backdrop-blur-sm sm:p-14">
+          <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-primary opacity-20 blur-3xl" />
+          <div className="relative grid items-center gap-10 md:grid-cols-[1.3fr_1fr]">
+            <div className="animate-rise">
+              <span className="inline-flex items-center gap-2 rounded-full bg-yellow px-4 py-1.5 text-sm font-bold text-ink">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+                Emprendimientos universitarios
+              </span>
+              <h1 className="mt-6 text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-7xl">
                 Tu producto,
                 <br />
-                directo al campus
+                <span className="text-primary">directo al campus</span>
               </h1>
-              <p className="mt-4 max-w-xs text-sm text-white/90 sm:text-base">
-                Hoy, mis propios productos. Mañana, los de todos los
-                emprendimientos de la universidad.
+              <p className="mt-6 max-w-md text-lg text-foreground-soft">
+                Hoy, mis propios productos. Mañana, los de todos los emprendimientos de la
+                universidad.
               </p>
-              <Link
-                href="/productos"
-                className="mt-7 inline-block rounded-full bg-foreground px-6 py-3 text-sm font-bold text-background"
-              >
-                Ver productos →
-              </Link>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="/productos"
+                  className="rounded-full bg-primary px-7 py-3.5 font-extrabold text-white shadow-glow transition-transform hover:scale-105"
+                >
+                  Ver productos →
+                </Link>
+                <Link
+                  href="/emprendimientos"
+                  className="rounded-full border border-line bg-background px-7 py-3.5 font-bold transition-colors hover:border-secondary"
+                >
+                  Conoce los emprendimientos
+                </Link>
+              </div>
             </div>
-            <div className="relative shrink-0">
-              <div className="absolute inset-x-6 bottom-2 h-6 rounded-full bg-black/15 blur-xl" />
+            <div className="relative grid place-items-center">
+              <div className="absolute h-64 w-64 rounded-full bg-yellow opacity-50 blur-3xl" />
               <HeroVisual />
             </div>
           </div>
-        </section>
-      </div>
-
-      <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
-        <div className="mb-5 flex items-baseline justify-between">
-          <h2 className="font-display text-xl font-bold">Lo más pedido</h2>
-          <Link href="/productos" className="text-sm font-bold text-primary">
-            Ver todo
-          </Link>
         </div>
+      </section>
+
+      <Marquee />
+
+      <main className="mx-auto w-full max-w-6xl flex-1 px-5">
+        <SectionTitle title="Lo más" accent="pedido" emoji="🔥" href="/productos" link="Ver todo" />
         <Suspense fallback={<ProductGridSkeleton />}>
           <FeaturedProducts />
         </Suspense>
 
-        <div className="mb-5 mt-14 flex items-baseline justify-between">
-          <h2 className="font-display text-xl font-bold">Detrás de cada producto</h2>
-          <Link href="/emprendimientos" className="text-sm font-bold text-primary">
-            Ver todos
-          </Link>
+        <div className="mt-20">
+          <SectionTitle title="Detrás de cada" accent="producto" href="/emprendimientos" link="Ver todos" />
+          <Suspense fallback={<VentureGridSkeleton />}>
+            <FeaturedVentures />
+          </Suspense>
         </div>
-        <Suspense fallback={<VentureGridSkeleton />}>
-          <FeaturedVentures />
-        </Suspense>
       </main>
+    </div>
+  );
+}
+
+/** Franja oscura con las categorías desplazándose sin parar. */
+function Marquee() {
+  // Cuatro copias: la animación mueve la mitad del ancho y vuelve a empezar sin salto.
+  const words = [...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS];
+  return (
+    <div className="my-12 overflow-hidden border-y border-line bg-foreground py-4" aria-hidden>
+      <div className="animate-marquee flex w-max gap-10 font-display text-2xl font-extrabold uppercase text-background [font-stretch:125%]">
+        {words.map((word, i) => (
+          <span key={i} className="flex items-center gap-10">
+            {word} <span className="text-yellow">✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SectionTitle({
+  title,
+  accent,
+  emoji,
+  href,
+  link,
+}: {
+  title: string;
+  accent: string;
+  emoji?: string;
+  href: string;
+  link: string;
+}) {
+  return (
+    <div className="mb-6 flex items-end justify-between gap-4">
+      <h2 className="text-3xl font-extrabold sm:text-4xl">
+        {title} <span className="text-primary">{accent}</span>
+        {emoji && <> {emoji}</>}
+      </h2>
+      <Link href={href} className="shrink-0 font-bold text-secondary hover:underline">
+        {link} →
+      </Link>
     </div>
   );
 }
@@ -68,16 +120,14 @@ async function FeaturedProducts() {
 
   if (products.length === 0) {
     return (
-      <p className="text-foreground-soft">
-        Pronto vas a encontrar aquí los primeros productos.
-      </p>
+      <p className="text-foreground-soft">Pronto vas a encontrar aquí los primeros productos.</p>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+    <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+      {products.map((product, i) => (
+        <ProductCard key={product.id} product={product} index={i} />
       ))}
     </div>
   );
@@ -95,9 +145,9 @@ async function FeaturedVentures() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-      {ventures.slice(0, 4).map((venture) => (
-        <VentureCard key={venture.id} venture={venture} />
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {ventures.slice(0, 6).map((venture, i) => (
+        <VentureCard key={venture.id} venture={venture} index={i} />
       ))}
     </div>
   );
