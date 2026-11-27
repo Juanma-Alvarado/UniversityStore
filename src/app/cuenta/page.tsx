@@ -12,7 +12,9 @@ export const metadata = {
 export default function CuentaPage() {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-10">
-      <h1 className="mb-6 font-display text-3xl font-extrabold">Mi cuenta</h1>
+      <h1 className="page-title mb-8">
+        Mi <span className="text-primary">cuenta</span>
+      </h1>
       <Suspense fallback={<div className="h-56 animate-pulse rounded-[28px] bg-surface" />}>
         <AccountDetails />
       </Suspense>
@@ -30,7 +32,7 @@ async function AccountDetails() {
 
   return (
     <div className="flex flex-col gap-4">
-      <section className="flex items-center gap-4 rounded-[28px] bg-primary p-6 text-white">
+      <section className="relative flex items-center gap-4 overflow-hidden rounded-[28px] bg-primary p-6 text-white shadow-glow">
         <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-yellow font-display text-3xl font-extrabold text-ink">
           {initial}
         </span>
@@ -45,7 +47,7 @@ async function AccountDetails() {
 
       <Link
         href="/pedidos"
-        className="flex items-center justify-between rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)] transition-transform hover:-translate-y-0.5"
+        className="panel flex items-center justify-between rounded-[28px] p-6 transition-transform hover:-translate-y-0.5"
       >
         <span className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-tint text-xl text-primary">
@@ -58,7 +60,7 @@ async function AccountDetails() {
 
       <Link
         href="/favoritos"
-        className="flex items-center justify-between rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)] transition-transform hover:-translate-y-0.5"
+        className="panel flex items-center justify-between rounded-[28px] p-6 transition-transform hover:-translate-y-0.5"
       >
         <span className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-tint text-xl text-primary">
@@ -69,8 +71,8 @@ async function AccountDetails() {
         <span className="text-xl font-bold text-foreground-soft">→</span>
       </Link>
 
-      <section className="rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
-        <h2 className="mb-4 font-display text-lg font-bold">Tus datos</h2>
+      <section className="panel rounded-[28px] p-6">
+        <h2 className="mb-4 font-display text-xl font-extrabold">Tus datos</h2>
         <ProfileForm displayName={profile.displayName} />
       </section>
 

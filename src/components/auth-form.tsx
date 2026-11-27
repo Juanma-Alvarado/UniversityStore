@@ -85,9 +85,9 @@ export function AuthForm() {
 
   if (sentTo) {
     return (
-      <div className="flex flex-col items-start gap-3 rounded-[28px] bg-surface p-7 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
+      <div className="panel flex flex-col items-start gap-3 rounded-[28px] p-7">
         <span className="text-4xl">📬</span>
-        <h1 className="font-display text-2xl font-extrabold">Revisa tu correo</h1>
+        <h1 className="font-display text-3xl font-extrabold tracking-tight">Revisa tu correo</h1>
         <p className="text-foreground-soft">
           Te enviamos un enlace a <strong className="text-foreground">{sentTo}</strong> para
           confirmar tu cuenta. Ábrelo desde este mismo navegador.
@@ -99,7 +99,7 @@ export function AuthForm() {
   const isLogin = mode === "login";
 
   return (
-    <div className="rounded-[28px] bg-surface p-7 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
+    <div className="panel rounded-[28px] p-7">
       <div className="mb-6 flex gap-1 rounded-full bg-background p-1">
         {(["login", "signup"] as const).map((m) => (
           <button
@@ -118,7 +118,7 @@ export function AuthForm() {
         ))}
       </div>
 
-      <h1 className="mb-1 font-display text-3xl font-extrabold">
+      <h1 className="mb-1 font-display text-4xl font-extrabold tracking-tight">
         {isLogin ? "¡Hola de nuevo!" : "Únete"}
       </h1>
       <p className="mb-6 text-sm text-foreground-soft">
@@ -150,7 +150,7 @@ export function AuthForm() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-2 rounded-full bg-primary py-3.5 text-sm font-bold text-white hover:bg-primary-press disabled:opacity-60"
+          className="mt-2 rounded-full bg-primary py-3.5 text-sm font-bold text-white hover:bg-primary-press disabled:opacity-60 shadow-glow transition-transform hover:scale-[1.03]"
         >
           {loading ? "Un segundo…" : isLogin ? "Ingresar" : "Crear cuenta"}
         </button>
@@ -169,7 +169,7 @@ function Field({ label, ...props }: FieldProps) {
       </span>
       <input
         {...props}
-        className="rounded-2xl border border-line bg-background px-4 py-3 text-base outline-none focus:border-primary"
+        className="field"
       />
     </label>
   );

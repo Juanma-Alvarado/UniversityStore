@@ -36,7 +36,7 @@ async function Confirmation({ searchParams }: Props) {
   if (!transaction) {
     return (
       <>
-        <h1 className="font-display text-3xl font-extrabold">No encontramos tu pago</h1>
+        <h1 className="font-display text-4xl font-extrabold tracking-tight">No encontramos tu pago</h1>
         <p className="text-foreground-soft">
           Si ya pagaste y ves esto, escríbenos para confirmar tu compra.
         </p>
@@ -61,7 +61,7 @@ async function Confirmation({ searchParams }: Props) {
         <span className="rounded-full bg-primary-tint px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-primary">
           Pago confirmado
         </span>
-        <h1 className="font-display text-3xl font-extrabold">¡Gracias por tu compra!</h1>
+        <h1 className="font-display text-4xl font-extrabold tracking-tight">¡Gracias por tu compra!</h1>
         <p className="text-foreground-soft">
           Pagaste {total}. Te contactaremos para coordinar la entrega.
         </p>
@@ -85,7 +85,7 @@ async function Confirmation({ searchParams }: Props) {
         <span className="rounded-full bg-yellow px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink">
           Pago en proceso
         </span>
-        <h1 className="font-display text-3xl font-extrabold">Tu banco todavía no confirma</h1>
+        <h1 className="font-display text-4xl font-extrabold tracking-tight">Tu banco todavía no confirma</h1>
         <p className="text-foreground-soft">
           Con PSE la confirmación puede tardar unos minutos. Apenas llegue, el pedido aparece
           {user ? " en tus pedidos" : " confirmado"}. No hace falta que pagues de nuevo.
@@ -109,7 +109,7 @@ async function Confirmation({ searchParams }: Props) {
       <span className="rounded-full bg-background px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-foreground-soft">
         Pago no completado
       </span>
-      <h1 className="font-display text-3xl font-extrabold">No se pudo completar el pago</h1>
+      <h1 className="font-display text-4xl font-extrabold tracking-tight">No se pudo completar el pago</h1>
       <p className="text-foreground-soft">
         El pago de {total} fue rechazado o cancelado. Tu carrito sigue guardado para que lo
         intentes de nuevo.

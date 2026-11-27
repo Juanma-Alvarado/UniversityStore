@@ -13,7 +13,9 @@ export const metadata = {
 export default function PedidosPage() {
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
-      <h1 className="mb-6 font-display text-3xl font-extrabold">Mis pedidos</h1>
+      <h1 className="page-title mb-8">
+        Mis <span className="text-primary">pedidos</span>
+      </h1>
       <Suspense
         fallback={
           <div className="flex flex-col gap-4">
@@ -34,14 +36,14 @@ async function OrderList() {
 
   if (orders.length === 0) {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-[28px] bg-surface p-6 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
+      <div className="panel flex flex-col items-start gap-4 rounded-[28px] p-6">
         <p className="text-foreground-soft">
           Todavía no has hecho ningún pedido. Cuando pidas con tu cuenta iniciada, lo verás
           aquí.
         </p>
         <Link
           href="/productos"
-          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white"
+          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-glow transition-transform hover:scale-[1.03]"
         >
           Ver productos
         </Link>
@@ -66,7 +68,7 @@ function OrderCard({ order }: { order: Order }) {
   }).format(new Date(order.createdAt));
 
   return (
-    <article className="rounded-[28px] bg-surface p-5 shadow-[0_4px_16px_rgba(24,21,17,0.08)]">
+    <article className="panel rounded-[28px] p-5">
       <header className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="font-display text-lg font-bold">{date}</p>

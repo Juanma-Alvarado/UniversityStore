@@ -20,7 +20,7 @@ export function ProfileForm({ displayName }: { displayName: string }) {
           defaultValue={displayName}
           maxLength={60}
           required
-          className="rounded-2xl border border-line bg-background px-4 py-3 text-base outline-none focus:border-primary"
+          className="field"
         />
       </label>
       <button
