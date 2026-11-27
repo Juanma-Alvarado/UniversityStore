@@ -39,7 +39,7 @@ export function AddToCart({ product }: { product: Product }) {
 
   return (
     <div className="mt-2 flex items-center gap-3">
-      <div className="flex items-center gap-1 rounded-full bg-background p-1">
+      <div className="flex items-center gap-1 rounded-full border border-line bg-background p-1">
         <button
           type="button"
           aria-label="Restar cantidad"
@@ -65,7 +65,7 @@ export function AddToCart({ product }: { product: Product }) {
       <button
         type="button"
         onClick={handleAdd}
-        className="flex-1 rounded-full bg-primary px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.02]"
+        className="flex-1 rounded-full bg-primary px-6 py-3.5 text-sm font-extrabold text-white transition-transform hover:scale-[1.02] shadow-glow"
       >
         {added ? "Agregado ✓" : "Agregar al carrito"}
       </button>

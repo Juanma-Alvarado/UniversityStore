@@ -28,7 +28,7 @@ export function ReviewForm({ productId, productSlug, reviews }: Props) {
 
   if (!user) {
     return (
-      <div className="flex flex-col items-start gap-3 rounded-[24px] bg-surface p-5 shadow-[0_4px_16px_rgba(24,21,17,0.08)] sm:flex-row sm:items-center sm:justify-between">
+      <div className="panel flex flex-col items-start gap-3 rounded-[24px] p-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-foreground-soft">¿Lo probaste? Cuéntale al resto qué te pareció.</p>
         <Link
           href={`/ingresar?next=${encodeURIComponent(`/productos/${productSlug}`)}`}
@@ -64,7 +64,7 @@ function Form({ productId, own }: { productId: string; own: Review | null }) {
     <form
       action={action}
       onSubmit={() => setDeleteState(null)}
-      className="flex flex-col gap-4 rounded-[24px] bg-surface p-5 shadow-[0_4px_16px_rgba(24,21,17,0.08)]"
+      className="panel flex flex-col gap-4 rounded-[24px] p-5"
     >
       <input type="hidden" name="productId" value={productId} />
       <h3 className="font-display text-lg font-bold">
@@ -109,14 +109,14 @@ function Form({ productId, own }: { productId: string; own: Review | null }) {
         maxLength={1000}
         rows={3}
         placeholder="¿Qué te gustó? ¿Qué mejorarías? (opcional)"
-        className="resize-y rounded-2xl border border-line bg-background px-4 py-3 text-base outline-none focus:border-primary"
+        className="resize-y field"
       />
 
       <div className="flex flex-wrap items-center gap-3">
         <button
           type="submit"
           disabled={pending || deleting || rating === 0}
-          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white disabled:opacity-60"
+          className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-white disabled:opacity-60 shadow-glow transition-transform hover:scale-[1.03]"
         >
           {pending ? "Guardando…" : own ? "Actualizar reseña" : "Publicar reseña"}
         </button>

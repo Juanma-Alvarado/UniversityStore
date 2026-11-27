@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function ProductoPage({ params }: Props) {
   return (
-    <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-10">
+    <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-10">
       <Link
         href="/productos"
         className="mb-6 inline-block text-sm font-bold text-foreground-soft hover:text-primary"
@@ -63,7 +63,7 @@ async function ProductDetail({ params }: Props) {
   return (
     <>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-        <div className="relative aspect-square w-full overflow-hidden rounded-[24px] bg-primary-tint">
+        <div className="animate-rise relative aspect-square w-full overflow-hidden rounded-[2.5rem] border border-line bg-primary-tint shadow-sm">
           {product.image_url ? (
             <Image
               src={product.image_url}
@@ -84,14 +84,14 @@ async function ProductDetail({ params }: Props) {
             className="absolute right-3 top-3"
           />
         </div>
-        <div className="flex flex-col gap-3">
-          <span className="text-xs font-bold uppercase tracking-wide text-foreground-soft">
+        <div className="animate-rise flex flex-col gap-3 sm:pt-4" style={{ animationDelay: "120ms" }}>
+          <span className="text-xs font-bold uppercase tracking-[0.12em] text-secondary">
             {product.category}
           </span>
-          <h1 className="font-display text-3xl font-extrabold text-balance">
+          <h1 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tight text-balance sm:text-5xl">
             {product.name}
           </h1>
-          <span className="font-display text-2xl font-extrabold text-primary">
+          <span className="font-display text-3xl font-extrabold text-primary">
             {formatPrice(product.price, product.currency)}
           </span>
           <p className="text-foreground-soft">{product.description}</p>

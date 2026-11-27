@@ -21,7 +21,7 @@ export async function ProductReviews({
   return (
     <section className="mt-12 flex flex-col gap-5" aria-labelledby="reviews-title">
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <h2 id="reviews-title" className="font-display text-2xl font-extrabold">
+        <h2 id="reviews-title" className="font-display text-3xl font-extrabold sm:text-4xl">
           Reseñas
         </h2>
         {count > 0 && (
@@ -46,7 +46,7 @@ export async function ProductReviews({
           {reviews.map((review) => (
             <li
               key={review.id}
-              className="flex flex-col gap-2 rounded-[20px] bg-surface p-4 shadow-[0_4px_16px_rgba(24,21,17,0.08)]"
+              className="panel flex flex-col gap-2 rounded-[20px] p-4"
             >
               <div className="flex items-center gap-3">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-yellow font-display font-extrabold text-ink">
