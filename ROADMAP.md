@@ -68,6 +68,11 @@ Diseño: contenido "detrás del emprendimiento", transiciones fluidas entre cate
 Funcionalidades: onboarding de vendedores (verificación estudiantil), dashboard de vendedor, pagos divididos (proveedor a definir: Wompi o Mercado Pago), buscador/filtros por categoría-facultad-precio, mensajería comprador-vendedor, moderación.
 Diseño: vitrina personalizable por vendedor dentro de los límites de marca, feed de descubrimiento.
 
+## Panel /admin
+Página privada para cargar y editar emprendimientos y productos (fotos, precios, categorías, WhatsApp, historia) sin entrar a Supabase. Entra solo quien esté en la tabla `admins` (se agrega desde el SQL Editor: `insert into admins (user_id) select id from auth.users where email = '...'`); para el resto `/admin` responde 404. La base exige `is_admin()` para escribir en `products`, `ventures` y el bucket `catalog` de Storage (fotos públicas, máx. 8 MB, JPG/PNG/WebP), así que no depende solo de la página. Las fotos se suben directo del navegador a Storage. Acceso desde "Mi cuenta".
+
+Pendiente: al reemplazar o borrar un producto/emprendimiento su foto vieja queda en Storage; limpiar huérfanas si se acumulan.
+
 ## Publicación
 En producción: https://university-store-xi.vercel.app (Vercel, equipo `alwars`, se despliega con cada push a `main`).
 
