@@ -2,57 +2,44 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Venture } from "@/lib/ventures";
 
-/** Card foto-céntrica para listar emprendimientos (home y /emprendimientos). */
-export function VentureCard({ venture }: { venture: Venture }) {
+/** Card de emprendimiento: la foto ocupa toda la card y el texto va encima (home y /emprendimientos). */
+export function VentureCard({ venture, index }: { venture: Venture; index?: number }) {
   return (
     <Link
       href={`/emprendimientos/${venture.slug}`}
-      className="group flex flex-col overflow-hidden rounded-[22px] bg-surface shadow-[0_6px_20px_rgba(24,21,17,0.1)] transition-transform hover:-translate-y-1"
+      className={`card-glow group relative block aspect-[10/9] overflow-hidden rounded-[28px] bg-primary-tint ${
+        index !== undefined ? "animate-rise" : ""
+      }`}
+      style={index !== undefined ? { animationDelay: `${index * 110}ms` } : undefined}
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-primary-tint">
-        {venture.image_url ? (
-          <Image
-            src={venture.image_url}
-            alt={`Foto de ${venture.name}`}
-            fill
-            sizes="(min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        ) : null}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-        <span className="absolute left-3.5 top-3.5 rounded-full bg-yellow px-2.5 py-1 text-[10.5px] font-extrabold uppercase tracking-wide text-ink">
+      {venture.image_url ? (
+        <Image
+          src={venture.image_url}
+          alt={`Foto de ${venture.name}`}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      ) : null}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-5 sm:p-6">
+        <span className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-yellow">
           Emprendimiento
         </span>
-        <h3 className="absolute bottom-3.5 left-4 right-4 font-display text-2xl font-extrabold leading-tight text-white">
+        <h3 className="font-display text-3xl font-extrabold leading-none text-white">
           {venture.name}
         </h3>
-      </div>
-      <div className="flex flex-1 items-end justify-between gap-3 p-4">
-        <p className="text-sm text-foreground-soft">{venture.tagline}</p>
-        <span
-          aria-hidden
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-white transition-transform group-hover:translate-x-0.5"
-        >
-          →
-        </span>
+        <p className="mt-1 line-clamp-2 text-sm text-white/80">{venture.tagline}</p>
       </div>
     </Link>
   );
 }
 
-export function VentureGridSkeleton({ count = 2 }: { count?: number }) {
+export function VentureGridSkeleton({ count = 3 }: { count?: number }) {
   return (
-    <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: count }).map((_, i) => (
-        <div
-          key={i}
-          className="animate-pulse overflow-hidden rounded-[22px] bg-surface shadow-[0_6px_20px_rgba(24,21,17,0.1)]"
-        >
-          <div className="aspect-[16/10] w-full bg-primary-tint" />
-          <div className="p-4">
-            <div className="h-4 w-2/3 rounded bg-background" />
-          </div>
-        </div>
+        <div key={i} className="aspect-[10/9] animate-pulse rounded-[28px] bg-surface" />
       ))}
     </div>
   );
