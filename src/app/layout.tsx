@@ -10,10 +10,9 @@ import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-// Titulares: Archivo, variable en peso y en ancho (la franja de categorías la usa expandida).
+// Titulares: Archivo (extra gruesa y apretada); cuerpo: Instrument Sans.
 const archivo = Archivo({
   variable: "--font-archivo",
-  axes: ["wdth"],
   subsets: ["latin"],
 });
 

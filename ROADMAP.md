@@ -27,11 +27,11 @@ Primera versión (descartada): fondo oscuro, acento lima + violeta eléctrico, t
 Dirección actual, inspirada en apps como Rappi: color dominante vibrante (no un acento tímido), esquinas muy redondeadas, cards foto-céntricas con badges flotantes, botones píldora, tono informal. Se adapta la paleta (no se copia): verde en vez de naranja, con amarillo como secundario.
 
 - **Verde** `#17B35B` (dark: `#1FCB6E`) · **Amarillo** `#FFC527` (dark: `#FFCF47`) · **Tinta/Papel** invertidos entre modo claro (`#FFF8F3`/`#181511`) y oscuro (`#121212`/`#F5F3EF`)
-- Tipografía: **Archivo** (titulares extra gruesos y apretados; variable en ancho, la franja de categorías la usa expandida) + **Instrument Sans** (cuerpo). Reemplazó a Baloo 2 + Plus Jakarta Sans en el rediseño de nov-2026 — sin monoespaciada en ningún lado
+- Tipografía: **Archivo** (titulares extra gruesos y apretados) + **Instrument Sans** (cuerpo). Reemplazó a Baloo 2 + Plus Jakarta Sans en el rediseño de nov-2026 — sin monoespaciada en ningún lado
 - Luces (rediseño inspirado en una maqueta de Lovable, adaptada a nuestros colores): manchas de color desenfocadas que se mueven en el fondo (verde, amarillo y un tercer color verde azulado `--secondary`), halo detrás de la foto del hero, brillo verde (`shadow-glow`) en botones y cards al pasar el mouse. En modo oscuro las luces bajan de intensidad
 - Modo claro y oscuro con toggle manual (persistido en localStorage) y fallback a preferencia del sistema
 - Patrones de card: foto ocupando casi todo, precio y disponibilidad como badges flotantes, botón "+" circular de agregado rápido
-- Motion: entrada `animate-rise` (escalonada en las cards), franja de categorías en movimiento continuo, punto que late en la etiqueta del hero; todo se apaga con "reducir movimiento". Hero animado con GSAP (foto de producto real con fondo removido, no modelo 3D) + scroll suave con Lenis en todo el sitio. Three.js/Blender quedan descartados por ahora — la foto cumple el mismo objetivo con mucho menos esfuerzo
+- Motion: entrada `animate-rise` (escalonada en las cards), punto que late en la etiqueta del hero; todo se apaga con "reducir movimiento". Hero animado con GSAP (foto de producto real con fondo removido, no modelo 3D) + scroll suave con Lenis en todo el sitio. Three.js/Blender quedan descartados por ahora — la foto cumple el mismo objetivo con mucho menos esfuerzo
 
 ## Fases
 

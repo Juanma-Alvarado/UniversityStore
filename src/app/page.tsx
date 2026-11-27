@@ -7,8 +7,6 @@ import { VentureCard, VentureGridSkeleton } from "@/components/venture-card";
 import { getProducts } from "@/lib/products";
 import { getVentures } from "@/lib/ventures";
 
-const MARQUEE_WORDS = ["Ropa", "Comida", "Calzado", "Flores", "Estampados", "Hecho en el campus"];
-
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
@@ -53,9 +51,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Marquee />
-
-      <main className="mx-auto w-full max-w-6xl flex-1 px-5">
+      <main className="mx-auto mt-16 w-full max-w-6xl flex-1 px-5">
         <SectionTitle title="Lo más" accent="pedido" emoji="🔥" href="/productos" link="Ver todo" />
         <Suspense fallback={<ProductGridSkeleton />}>
           <FeaturedProducts />
@@ -68,23 +64,6 @@ export default function Home() {
           </Suspense>
         </div>
       </main>
-    </div>
-  );
-}
-
-/** Franja oscura con las categorías desplazándose sin parar. */
-function Marquee() {
-  // Cuatro copias: la animación mueve la mitad del ancho y vuelve a empezar sin salto.
-  const words = [...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS];
-  return (
-    <div className="my-12 overflow-hidden border-y border-line bg-foreground py-4" aria-hidden>
-      <div className="animate-marquee flex w-max gap-10 font-display text-2xl font-extrabold uppercase text-background [font-stretch:125%]">
-        {words.map((word, i) => (
-          <span key={i} className="flex items-center gap-10">
-            {word} <span className="text-yellow">✦</span>
-          </span>
-        ))}
-      </div>
     </div>
   );
 }
