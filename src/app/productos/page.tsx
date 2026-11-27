@@ -11,8 +11,10 @@ export const metadata = {
 
 export default function ProductosPage() {
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
-      <h1 className="mb-6 font-display text-3xl font-extrabold">Productos</h1>
+    <main className="mx-auto w-full max-w-6xl flex-1 px-5 pt-10 sm:pt-14">
+      <h1 className="animate-rise mb-8 text-5xl font-extrabold tracking-tight sm:text-6xl">
+        Todos los <span className="text-primary">productos</span>
+      </h1>
       <Suspense fallback={<ProductGridSkeleton />}>
         <Catalog />
       </Suspense>

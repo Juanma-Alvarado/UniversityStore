@@ -9,9 +9,11 @@ export const metadata = {
 
 export default function EmprendimientosPage() {
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
-      <h1 className="font-display text-3xl font-extrabold">Emprendimientos</h1>
-      <p className="mb-6 mt-2 max-w-md text-foreground-soft">
+    <main className="mx-auto w-full max-w-6xl flex-1 px-5 pt-10 sm:pt-14">
+      <h1 className="animate-rise text-5xl font-extrabold tracking-tight sm:text-6xl">
+        Los <span className="text-primary">emprendimientos</span>
+      </h1>
+      <p className="mb-10 mt-4 max-w-md text-lg text-foreground-soft">
         Detrás de cada producto hay estudiantes armando su propio proyecto. Conoce
         quiénes son y cómo trabajan.
       </p>
@@ -30,9 +32,9 @@ async function VentureList() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-      {ventures.map((venture) => (
-        <VentureCard key={venture.id} venture={venture} />
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {ventures.map((venture, i) => (
+        <VentureCard key={venture.id} venture={venture} index={i} />
       ))}
     </div>
   );

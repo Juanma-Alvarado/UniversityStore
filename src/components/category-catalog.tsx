@@ -46,7 +46,7 @@ export function CategoryCatalog({ categories, items }: Props) {
       <CategoryChips categories={categories} active={category} onSelect={select} />
 
       {visible.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {visible.map((item) => (
             <ViewTransition
               key={item.id}
@@ -107,11 +107,11 @@ function CategoryChips({
   const chips = [{ key: "", label: "Todo", value: null }, ...categories.map((c) => ({ key: c, label: c, value: c }))];
 
   return (
-    <div ref={containerRef} className="relative isolate mb-6 flex flex-wrap gap-2.5">
+    <div ref={containerRef} className="relative isolate mb-10 flex flex-wrap gap-2">
       {pill && (
         <span
           aria-hidden
-          className="pointer-events-none absolute left-0 top-0 z-[1] rounded-full bg-foreground transition-[translate,width,height] duration-300 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none"
+          className="pointer-events-none absolute left-0 top-0 z-[1] rounded-full bg-primary shadow-glow transition-[translate,width,height] duration-300 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none"
           style={{ translate: `${pill.x}px ${pill.y}px`, width: pill.width, height: pill.height }}
         />
       )}
@@ -127,11 +127,11 @@ function CategoryChips({
             href={hrefFor(chip.value)}
             onClick={(event) => onSelect(event, chip.value)}
             aria-current={isActive ? "true" : undefined}
-            className={`relative rounded-full px-4 py-2 text-sm font-bold transition-colors duration-300 ${
+            className={`relative rounded-full border px-5 py-2 font-bold transition-colors duration-300 ${
               isActive && !pill
-                ? "bg-foreground text-background"
-                : "bg-surface shadow-[0_2px_8px_rgba(24,21,17,0.08)]"
-            } ${isActive ? "text-background" : "text-foreground"}`}
+                ? "border-transparent bg-primary text-white shadow-glow"
+                : "border-line bg-surface"
+            } ${isActive ? "text-white" : "text-foreground-soft hover:text-foreground"}`}
           >
             <span className="relative z-[2]">{chip.label}</span>
           </a>

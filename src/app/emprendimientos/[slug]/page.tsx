@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function EmprendimientoPage({ params }: Props) {
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
+    <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-10">
       <Link
         href="/emprendimientos"
         className="mb-6 inline-block text-sm font-bold text-foreground-soft hover:text-primary"
@@ -101,7 +101,9 @@ async function VentureDetail({ params }: Props) {
       </div>
 
       <section className="mt-12">
-        <h2 className="mb-5 font-display text-xl font-bold">Sus productos</h2>
+        <h2 className="mb-6 text-3xl font-extrabold sm:text-4xl">
+          Sus <span className="text-primary">productos</span>
+        </h2>
         <Suspense fallback={<ProductGridSkeleton />}>
           <VentureProducts ventureId={venture.id} />
         </Suspense>
@@ -113,7 +115,7 @@ async function VentureDetail({ params }: Props) {
 function VentureHero({ venture }: { venture: Venture }) {
   return (
     <section>
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[28px] bg-primary sm:aspect-[21/9]">
+      <div className="animate-rise relative aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] bg-primary sm:aspect-[21/9]">
         {venture.image_url ? (
           <Image
             src={venture.image_url}
@@ -177,9 +179,9 @@ async function VentureProducts({ ventureId }: { ventureId: string }) {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+    <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+      {products.map((product, i) => (
+        <ProductCard key={product.id} product={product} index={i} />
       ))}
     </div>
   );
