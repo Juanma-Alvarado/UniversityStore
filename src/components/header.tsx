@@ -9,31 +9,33 @@ export function Header() {
   const { count } = useCart();
 
   return (
-    <header className="sticky top-0 z-10 border-b border-line bg-background/95 backdrop-blur">
-      <nav className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
-        <Link href="/" className="font-display text-xl font-extrabold text-primary">
-          UniversityStore
+    <header className="sticky top-0 z-20 border-b border-line bg-background/70 backdrop-blur-xl">
+      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-3.5">
+        <Link href="/" className="font-display text-xl font-extrabold tracking-tight">
+          <span className="text-primary">University</span>Store
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/productos"
-            className="hidden rounded-full px-4 py-2 text-sm font-bold text-foreground-soft hover:text-foreground sm:inline-block"
+            className="hidden rounded-full px-3 py-2 text-sm font-bold text-foreground-soft transition-colors hover:text-foreground sm:inline-block"
           >
             Productos
           </Link>
           <Link
             href="/emprendimientos"
-            className="hidden rounded-full px-4 py-2 text-sm font-bold text-foreground-soft hover:text-foreground sm:inline-block"
+            className="hidden rounded-full px-3 py-2 text-sm font-bold text-foreground-soft transition-colors hover:text-foreground sm:inline-block"
           >
             Emprendimientos
           </Link>
           <Link
             href="/carrito"
-            className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-line bg-surface text-lg"
+            aria-label={count > 0 ? `Carrito, ${count} productos` : "Carrito"}
+            className="relative flex h-10 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-extrabold text-white shadow-glow transition-transform hover:scale-105"
           >
-            🛒
+            <span aria-hidden>🛒</span>
+            <span className="hidden sm:inline">Carrito</span>
             {count > 0 && (
-              <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-yellow px-1 text-xs font-extrabold text-ink">
                 {count}
               </span>
             )}
